@@ -1,3 +1,5 @@
+Please add digits separator in number
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -145,21 +147,26 @@
                 background-color: #333;
                 color: #fff;
             }
+            
             .nav-tabs .nav-link.active {
                 background-color: #dc3545;
                 color: #fff;
             }
+            
             .tab-content {
                 padding: 15px;
                 background-color: #2a2a2a;
             }
+    
         </style>
     </head>
     <body>
+    
         <!-- Background Video -->
         <div class="background-video">
             <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
+    
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="#">TechShop</a>
@@ -192,6 +199,7 @@
                 </ul>
             </div>
         </nav>
+    
         <!-- Header Section -->
         <header class="jumbotron jumbotron-fluid text-center" style="background-color: rgba(31, 31, 31, 0.7);">
             <div class="container">
@@ -199,6 +207,7 @@
                 <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
             </div>
         </header>
+    
         <!-- Categories Section -->
         <section class="container my-5">
             <div class="row">
@@ -260,6 +269,7 @@
                 </div>
             </div>
         </section>
+    
         <!-- Cart Sidebar -->
         <div class="sidebar-cart" id="sidebarCart">
             <div class="sidebar-cart-header">
@@ -273,6 +283,7 @@
                 <button onclick="checkout()">Checkout</button>
             </div>
         </div>
+    
     <!-- Product Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -315,6 +326,7 @@
             </div>
         </div>
     </div>
+    
         <!-- Footer -->
         <footer class="footer">
             <div class="container">
@@ -332,16 +344,14 @@
                 <p>&copy; 2024 TechShop. All rights reserved.</p>
             </div>
         </footer>
+    
         <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
         <script>
             let cart = [];
-            function formatNumber(number) {
-                return number.toLocaleString(); // Format number with commas
-            }
+    
             function toggleCart() {
                 const cartSidebar = document.getElementById('sidebarCart');
                 const body = document.body;
@@ -353,16 +363,18 @@
                     body.classList.add('sidebar-open');
                 }
             }
+    
             function showProductDetails(productId, price) {
                 const modal = new bootstrap.Modal(document.getElementById('productModal'));
                 document.getElementById('productModalLabel').textContent = productId;
                 document.getElementById('productDescription').textContent = Details for ${productId};
-                document.getElementById('productPrice').textContent = formatNumber(price);
+                document.getElementById('productPrice').textContent = price;
                 modal.show();
             }
+    
             function addToCart() {
                 const productId = document.getElementById('productModalLabel').textContent;
-                const price = parseFloat(document.getElementById('productPrice').textContent.replace(/,/g, ''));
+                const price = parseFloat(document.getElementById('productPrice').textContent);
                 const quantity = parseInt(document.getElementById('productQuantity').value);
                 const item = {
                     id: productId,
@@ -373,6 +385,7 @@
                 updateCart();
                 toggleCart(); // Close the cart sidebar after adding the item
             }
+    
             function updateCart() {
                 const cartContent = document.getElementById('cartContent');
                 cartContent.innerHTML = ''; // Clear previous content
@@ -385,7 +398,7 @@
                                 <img src="https://via.placeholder.com/50" alt="${item.id}">
                                 <div>
                                     <h5>${item.id}</h5>
-                                    <p>Price: $${formatNumber(item.price)} x ${item.quantity}</p>
+                                    <p>Price: $${item.price} x ${item.quantity}</p>
                                 </div>
                             </div>
                         </div>
@@ -395,15 +408,17 @@
                     <div class="cart-item">
                         <div class="details">
                             <h5>Total</h5>
-                            <p>$${formatNumber(total.toFixed(2))}</p>
+                            <p>$${total.toFixed(2)}</p>
                         </div>
                     </div>
                 ;
                 document.getElementById('cartCount').textContent = cart.length;
             }
+    
             function checkout() {
                 alert('Proceed to checkout');
             }
+    
             function filterProducts(category) {
                 document.querySelectorAll('.product').forEach(product => {
                     if (category === 'all' || product.classList.contains(category)) {
@@ -413,6 +428,7 @@
                     }
                 });
             }
+    
             document.addEventListener('DOMContentLoaded', function () {
                 // Initialize Bootstrap tabs
                 const tabTriggerList = document.querySelectorAll('#productTabs .nav-link');
@@ -424,6 +440,8 @@
                     });
                 });
             });
+    
+    
         </script>
     </body>
 </html>
