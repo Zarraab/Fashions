@@ -8,15 +8,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            background-color: #121212;
-            color: #ffffff;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+        }
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+            z-index: -1;
+            background: url('https://via.placeholder.com/150') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px); /* Optional: Blur effect for the background */
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.6);
         }
         .navbar {
             background-color: #1f1f1f;
             padding: 10px;
             position: relative;
+            z-index: 2;
         }
         .navbar .logo {
             max-height: 50px;
@@ -35,6 +52,11 @@
         .basket-icon:hover {
             color: #dc3545;
         }
+        .separator {
+            height: 1px;
+            background-color: #444;
+            margin: 20px 0;
+        }
         .card {
             background-color: #2a2a2a;
             border: none;
@@ -42,6 +64,18 @@
         .card img {
             height: 200px;
             object-fit: cover;
+        }
+        .tags {
+            margin-top: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-right: 5px;
         }
         .footer {
             background-color: #1f1f1f;
@@ -69,13 +103,8 @@
             background-color: #1f1f1f;
             color: #ffffff;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
             z-index: 1000;
             overflow-y: auto;
-        }
-        .sidebar-cart.open {
-            transform: translateX(0);
         }
         body.sidebar-open {
             overflow: hidden;
@@ -142,218 +171,159 @@
 </head>
 <body>
 
-    <!-- Header with Logo and Basket Icon -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="https://via.placeholder.com/150x50" alt="Logo" class="logo"></a>
-        <i class="fas fa-shopping-cart basket-icon" onclick="toggleCart()"></i>
-    </nav>
+    <!-- Background Video -->
+    <div class="video-background">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=0&showinfo=0&modestbranding=1&start=5" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
 
-    <!-- Header Section -->
-    <header class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">Welcome to TechShop</h1>
-            <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
-        </div>
-    </header>
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header with Logo and Basket Icon -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#"><img src="https://via.placeholder.com/150x50" alt="Logo" class="logo"></a>
+            <i class="fas fa-shopping-cart basket-icon"></i>
+        </nav>
 
-    <!-- Categories Section -->
-    <section class="container my-5">
-        <div class="row">
-            <div class="col-md-3">
-                <h5>Categories</h5>
-                <ul class="list-group">
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">All</li>
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">Laptops</li>
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">Smartphones</li>
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">Accessories</li>
-                </ul>
+        <!-- Separator -->
+        <div class="separator"></div>
+
+        <!-- Header Section -->
+        <header class="jumbotron jumbotron-fluid text-center">
+            <div class="container">
+                <h1 class="display-4">Welcome to TechShop</h1>
+                <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
             </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <!-- Laptops -->
-                    <div class="col-md-4 product laptops" id="product1">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Laptop 1</h5>
-                                <p class="card-text">Powerful and sleek. Price: $<span class="price">1200</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
+        </header>
+
+        <!-- Separator -->
+        <div class="separator"></div>
+
+        <!-- Categories Section -->
+        <section class="container my-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Categories</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">All</li>
+                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('electronics')">Electronics</li>
+                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('gadgets')">Gadgets</li>
+                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">Accessories</li>
+                    </ul>
+                </div>
+
+                <!-- Product Cards -->
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Product Name</h5>
+                                    <p class="card-text">Short description of the product.</p>
+                                    <div class="tags">
+                                        <span class="tag">Electronics</span> <!-- Example of Category as a tag -->
+                                        <span class="tag">Tag1</span>
+                                        <span class="tag">Tag2</span>
+                                    </div>
+                                    <a href="#" class="btn btn-danger mt-3">Add to Cart</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 product laptops" id="product2">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Laptop 2</h5>
-                                <p class="card-text">Lightweight and portable. Price: $<span class="price">1500</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Smartphones -->
-                    <div class="col-md-4 product smartphones" id="product3">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Smartphone 1</h5>
-                                <p class="card-text">Latest model with great features. Price: $<span class="price">800</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product3', 800)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 product smartphones" id="product4">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Smartphone 2</h5>
-                                <p class="card-text">Affordable and reliable. Price: $<span class="price">500</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product4', 500)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Accessories -->
-                    <div class="col-md-4 product accessories" id="product5">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Accessory 1</h5>
-                                <p class="card-text">Essential for your devices. Price: $<span class="price">50</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product5', 50)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 product accessories" id="product6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Accessory 2</h5>
-                                <p class="card-text">High-quality and durable. Price: $<span class="price">70</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product6', 70)">View Details</button>
-                            </div>
-                        </div>
+
+                        <!-- Repeat for other products -->
+                        <!-- ... -->
+
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
+        <!-- Separator -->
+        <div class="separator"></div>
+
+        <!-- Product Details Section with Tabs -->
+        <section class="container my-5">
+            <ul class="nav nav-tabs" id="productDetailsTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="specs-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="false">Specifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="productDetailsTabContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                    <p>Product description goes here...</p>
+                </div>
+                <div class="tab-pane fade" id="specs" role="tabpanel" aria-labelledby="specs-tab">
+                    <p>Product specifications go here...</p>
+                </div>
+                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                    <p>Product reviews go here...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="separator"></div>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div>
+                <p>&copy; 2024 TechShop</p>
+            </div>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
             </div>
             <div class="payment-icons">
                 <i class="fab fa-cc-visa"></i>
                 <i class="fab fa-cc-mastercard"></i>
                 <i class="fab fa-cc-paypal"></i>
             </div>
-        </div>
-    </footer>
-
-    <!-- Product Details Modal -->
-    <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="productDetailsModalLabel">Product Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img id="modalImage" src="" alt="Product Image" class="img-fluid mb-3">
-                    <h5 id="modalTitle">Product Title</h5>
-                    <p id="modalDescription">Product description goes here.</p>
-                    <p><strong>Price:</strong> $<span id="modalPrice">0</span></p>
-                    <p><strong>Quantity:</strong> <input type="number" id="modalQuantity" min="1" value="1"></p>
-                    <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
 
-    <!-- Cart Sidebar -->
-    <div class="sidebar-cart" id="cartSidebar">
+    <!-- Sidebar Cart -->
+    <div id="sidebarCart" class="sidebar-cart">
         <div class="sidebar-cart-header">
             <h4>Your Cart</h4>
-            <button class="btn btn-danger" onclick="toggleCart()">Close</button>
+            <i class="fas fa-times close-icon" onclick="toggleCart()"></i>
         </div>
         <div class="sidebar-cart-content">
-            <!-- Cart items will be dynamically inserted here -->
+            <div class="cart-item">
+                <div class="details">
+                    <img src="https://via.placeholder.com/50" alt="Product Image">
+                    <div>
+                        <h5>Product Name</h5>
+                        <p>$100.00</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other cart items -->
+            <!-- ... -->
         </div>
         <div class="sidebar-cart-footer">
-            <button class="btn btn-danger" onclick="checkout()">Checkout</button>
+            <button>Checkout</button>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // Toggle Cart Sidebar
         function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('open');
-            document.body.classList.toggle('sidebar-open');
+            document.getElementById('sidebarCart').classList.toggle('open');
         }
 
-        // Show Product Details Modal
-        function showProductDetails(productId, price) {
-            var product = document.getElementById(productId);
-            var title = product.querySelector('.card-title').innerText;
-            var imgSrc = product.querySelector('.card-img-top').src;
-            var description = product.querySelector('.card-text').innerText;
-
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImage').src = imgSrc;
-            document.getElementById('modalDescription').innerText = description;
-            document.getElementById('modalPrice').innerText = price;
-            
-            $('#productDetailsModal').modal('show');
-        }
-
-        // Add to Cart Functionality
-        function addToCart() {
-            var title = document.getElementById('modalTitle').innerText;
-            var quantity = parseInt(document.getElementById('modalQuantity').value);
-            var price = parseFloat(document.getElementById('modalPrice').innerText);
-
-            // Add item to cart (example logic)
-            var cartContent = document.querySelector('.sidebar-cart-content');
-            var cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `<div class="details">
-                                    <img src="${document.getElementById('modalImage').src}" alt="${title}">
-                                    <div>
-                                        <h5>${title}</h5>
-                                        <p>Quantity: ${quantity}</p>
-                                        <p>Price: $${(price * quantity).toFixed(2)}</p>
-                                    </div>
-                                   </div>`;
-            cartContent.appendChild(cartItem);
-
-            $('#productDetailsModal').modal('hide');
-        }
-
-        // Checkout Functionality
-        function checkout() {
-            alert('Checkout functionality not implemented.');
-        }
-
-        // Filter Products by Category
         function filterProducts(category) {
-            var products = document.querySelectorAll('.product');
-            products.forEach(function(product) {
-                if (category === 'all' || product.classList.contains(category)) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
+            // Implement filtering logic here
+            console.log("Filter products by category:", category);
         }
     </script>
 </body>
