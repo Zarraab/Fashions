@@ -353,6 +353,10 @@
                     body.classList.add('sidebar-open');
                 }
             }
+        /*function toggleCart() {
+            document.getElementById('sidebarCart').classList.toggle('open');
+            document.body.classList.toggle('sidebar-open');
+        }*/
             function showProductDetails(productId, price) {
                 const modal = new bootstrap.Modal(document.getElementById('productModal'));
                 document.getElementById('productModalLabel').textContent = productId;
@@ -360,6 +364,11 @@
                 document.getElementById('productPrice').textContent = formatNumber(price);
                 modal.show();
             }
+        /*function showProductDetails(productId, price) {
+            document.getElementById('productDescription').innerText = document.getElementById(productId).querySelector('.card-title').innerText;
+            document.getElementById('productPrice').innerText = price.toLocaleString();
+            $('#productModal').modal('show');
+        }*/
             function addToCart() {
                 const productId = document.getElementById('productModalLabel').textContent;
                 const price = parseFloat(document.getElementById('productPrice').textContent.replace(/,/g, ''));
@@ -373,6 +382,12 @@
                 updateCart();
                 toggleCart(); // Close the cart sidebar after adding the item
             }
+        /*function addToCart() {
+            // Add the item to the cart
+            const quantity = document.getElementById('quantity').value;
+            // Get product details and update cart
+            // Here you can add functionality to update the sidebar cart with the selected product
+        }*/
             function updateCart() {
                 const cartContent = document.getElementById('cartContent');
                 cartContent.innerHTML = ''; // Clear previous content
