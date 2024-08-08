@@ -1,279 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>High Tech eCommerce</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <style>
-            body {
-                background-color: #121212;
-                color: #ffffff;
-                position: relative;
-                /*overflow: hidden;*/ /* Prevent scrolling when sidebar is open */
-            }
-            .navbar {
-                background-color: #1f1f1f;
-            }
-            .card {
-                background-color: #2a2a2a;
-                border: none;
-            }
-            .card img {
-                height: 200px;
-                object-fit: cover;
-            }
-            .footer {
-                background-color: #1f1f1f;
-                padding: 20px 0;
-                color: #a9a9a9;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .footer .social-icons i, .footer .payment-icons i {
-                margin-right: 15px;
-                font-size: 1.5rem;
-                color: #ffffff;
-            }
-            .modal-content {
-                background-color: #2a2a2a;
-                color: #ffffff;
-            }
-            .cart-icon {
-                position: relative;
-                cursor: pointer;
-            }
-            .cart-count {
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                background-color: #dc3545;
-                color: #ffffff;
-                border-radius: 50%;
-                padding: 2px 6px;
-                font-size: 0.75rem;
-            }
-            .background-video {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-                overflow: hidden;
-            }
-            .background-video iframe {
-                width: 100%;
-                height: 100%;
-                border: 0;
-            }
-            .sidebar-cart {
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 300px;
-                height: 100%;
-                background-color: #1f1f1f;
-                color: #ffffff;
-                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-                z-index: 1000;
-                overflow-y: auto; /* Allows vertical scrolling inside the sidebar */
-            }
-            .sidebar-cart.open {
-                transform: translateX(0);
-            }
-            body.sidebar-open {
-                overflow: hidden; /* Prevent scrolling of the body when sidebar is open */
-            }
-            .sidebar-cart-header {
-                padding: 15px;
-                border-bottom: 1px solid #2a2a2a;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .sidebar-cart-header h4 {
-                margin: 0;
-            }
-            .sidebar-cart-content {
-                padding: 15px;
-                overflow-y: auto;
-                height: calc(100% - 60px);
-            }
-            .cart-item {
-                margin-bottom: 10px;
-            }
-            .cart-item img {
-                width: 50px;
-                height: 50px;
-                object-fit: cover;
-                margin-right: 10px;
-            }
-            .cart-item .details {
-                display: flex;
-                align-items: center;
-            }
-            .cart-item .details h5 {
-                margin: 0;
-            }
-            .cart-item .details p {
-                margin: 0;
-                font-size: 0.875rem;
-                color: #a9a9a9;
-            }
-            .sidebar-cart-footer {
-                padding: 15px;
-                border-top: 1px solid #2a2a2a;
-                text-align: center;
-            }
-            .sidebar-cart-footer button {
-                background-color: #dc3545;
-                color: #ffffff;
-                border: none;
-                padding: 10px 20px;
-                cursor: pointer;
-            }
-            .modal-body input[type="number"] {
-                width: 100px;
-            }
-            .nav-tabs .nav-link {
-                border: none;
-                background-color: #333;
-                color: #fff;
-            }
-            .nav-tabs .nav-link.active {
-                background-color: #dc3545;
-                color: #fff;
-            }
-            .tab-content {
-                padding: 15px;
-                background-color: #2a2a2a;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Background Video -->
-        <div class="background-video">
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Tech eCommerce</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            position: relative;
+            /*overflow: hidden;*/ /* Prevent scrolling when sidebar is open */
+        }
+        .navbar {
+            background-color: #1f1f1f;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: none;
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .footer {
+            background-color: #1f1f1f;
+            padding: 20px 0;
+            color: #a9a9a9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer .social-icons i, .footer .payment-icons i {
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+        .modal-content {
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #dc3545;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+        }
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .background-video iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .sidebar-cart {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #1f1f1f;
+            color: #ffffff;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto; /* Allows vertical scrolling inside the sidebar */
+        }
+        .sidebar-cart.open {
+            transform: translateX(0);
+        }
+        body.sidebar-open {
+            overflow: hidden; /* Prevent scrolling of the body when sidebar is open */
+        }
+        .sidebar-cart-header {
+            padding: 15px;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sidebar-cart-header h4 {
+            margin: 0;
+        }
+        .sidebar-cart-content {
+            padding: 15px;
+            overflow-y: auto;
+            height: calc(100% - 60px);
+        }
+        .cart-item {
+            margin-bottom: 10px;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .cart-item .details {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item .details h5 {
+            margin: 0;
+        }
+        .cart-item .details p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #a9a9a9;
+        }
+        .sidebar-cart-footer {
+            padding: 15px;
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+        }
+        .sidebar-cart-footer button {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .modal-body input[type="number"] {
+            width: 100px;
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            background-color: #333;
+            color: #fff;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .tab-content {
+            padding: 15px;
+            background-color: #2a2a2a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <div class="background-video">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">TechShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cartCount" class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#">TechShop</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link cart-icon" onclick="toggleCart()">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span id="cartCount" class="cart-count">0</span>
-                        </a>
-                    </li>
+    </nav>
+    <!-- Header Section -->
+    <header class="jumbotron jumbotron-fluid text-center" style="background-color: rgba(31, 31, 31, 0.7);">
+        <div class="container">
+            <h1 class="display-4">Welcome to TechShop</h1>
+            <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
+        </div>
+    </header>
+    <!-- Categories Section -->
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Categories</h5>
+                <ul class="list-group">
+                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">All</li>
+                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">Laptops</li>
+                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">Smartphones</li>
+                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">Accessories</li>
                 </ul>
             </div>
-        </nav>
-        <!-- Header Section -->
-        <header class="jumbotron jumbotron-fluid text-center" style="background-color: rgba(31, 31, 31, 0.7);">
-            <div class="container">
-                <h1 class="display-4">Welcome to TechShop</h1>
-                <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
-            </div>
-        </header>
-        <!-- Categories Section -->
-        <section class="container my-5">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5>Categories</h5>
-                    <ul class="list-group">
-                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">All</li>
-                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">Laptops</li>
-                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">Smartphones</li>
-                        <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">Accessories</li>
-                    </ul>
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        <!-- Laptops -->
-                        <div class="col-md-4 product laptops" id="product1">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Laptop 1</h5>
-                                    <p class="card-text">Powerful and sleek. Price: $1200</p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
-                                </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Laptops -->
+                    <div class="col-md-4 product laptops" id="product1">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Laptop 1</h5>
+                                <p class="card-text">Powerful and sleek. Price: $<span class="price">1,200</span></p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
                             </div>
                         </div>
-                        <div class="col-md-4 product laptops" id="product2">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Laptop 2</h5>
-                                    <p class="card-text">Lightweight and portable. Price: $1500</p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
-                                </div>
+                    </div>
+                    <div class="col-md-4 product laptops" id="product2">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Laptop 2</h5>
+                                <p class="card-text">Lightweight and portable. Price: $<span class="price">1,500</span></p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
                             </div>
                         </div>
-                        <!-- Smartphones -->
-                        <div class="col-md-4 product smartphones" id="product3">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Smartphone 1</h5>
-                                    <p class="card-text">Latest technology. Price: $800</p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product3', 800)">View Details</button>
-                                </div>
+                    </div>
+                    <!-- Smartphones -->
+                    <div class="col-md-4 product smartphones" id="product3">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Smartphone 1</h5>
+                                <p class="card-text">Latest model with great features. Price: $<span class="price">800</span></p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product3', 800)">View Details</button>
                             </div>
                         </div>
-                        <!-- Accessories -->
-                        <div class="col-md-4 product accessories" id="product4">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Accessory 1</h5>
-                                    <p class="card-text">Essential accessory. Price: $50</p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product4', 50)">View Details</button>
-                                </div>
+                    </div>
+                    <div class="col-md-4 product smartphones" id="product4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Smartphone 2</h5>
+                                <p class="card-text">High performance and durability. Price: $<span class="price">1,000</span></p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product4', 1000)">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Accessories -->
+                    <div class="col-md-4 product accessories" id="product5">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Accessory 1</h5>
+                                <p class="card-text">Stylish and functional. Price: $<span class="price">50</span></p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product5', 50)">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 product accessories" id="product6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Accessory 2</h5>
+                                <p class="card-text">Useful and trendy. Price: $<span class="price">75</span></p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product6', 75)">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Cart Sidebar -->
-        <div class="sidebar-cart" id="sidebarCart">
-            <div class="sidebar-cart-header">
-                <h4>Shopping Cart</h4>
-                <button class="close-btn" onclick="toggleCart()">×</button>
-            </div>
-            <div class="sidebar-cart-content" id="cartContent">
-                <!-- Cart items will be dynamically added here -->
-            </div>
-            <div class="sidebar-cart-footer">
-                <button onclick="checkout()">Checkout</button>
-            </div>
         </div>
-    <!-- Product Modal -->
+    </section>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="payment-icons">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-paypal"></i>
+        </div>
+    </footer>
+    <!-- Cart Sidebar -->
+    <div class="sidebar-cart" id="sidebarCart">
+        <div class="sidebar-cart-header">
+            <h4>Your Cart</h4>
+            <button class="close" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="sidebar-cart-content">
+            <!-- Cart Items Will Be Injected Here -->
+        </div>
+        <div class="sidebar-cart-footer">
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+    <!-- Product Details Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -284,146 +318,52 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" id="productTabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="specs-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="false">Specifications</a>
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                            <p id="productDescription">Product description goes here.</p>
-                        </div>
-                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                            <p id="productReviews">Product reviews go here.</p>
-                        </div>
-                        <div class="tab-pane fade" id="specs" role="tabpanel" aria-labelledby="specs-tab">
-                            <p id="productSpecs">Product specifications go here.</p>
-                        </div>
-                    </div>
+                    <p id="productDescription"></p>
                     <p>Price: $<span id="productPrice"></span></p>
-                    <input type="number" id="productQuantity" min="1" value="1">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" value="1" min="1">
                     <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
                 </div>
             </div>
         </div>
     </div>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <div class="payment-icons">
-                    <i class="fab fa-cc-visa"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-cc-paypal"></i>
-                </div>
-                <p>&copy; 2024 TechShop. All rights reserved.</p>
-            </div>
-        </footer>
-        <!-- Scripts -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleCart() {
+            document.getElementById('sidebarCart').classList.toggle('open');
+            document.body.classList.toggle('sidebar-open');
+        }
 
-        <script>
-            let cart = [];
-            function formatNumber(number) {
-                return number.toLocaleString(); // Format number with commas
-            }
-            function toggleCart() {
-                const cartSidebar = document.getElementById('sidebarCart');
-                const body = document.body;
-                if (cartSidebar.classList.contains('open')) {
-                    cartSidebar.classList.remove('open');
-                    body.classList.remove('sidebar-open');
+        function showProductDetails(productId, price) {
+            document.getElementById('productDescription').innerText = document.getElementById(productId).querySelector('.card-title').innerText;
+            document.getElementById('productPrice').innerText = price.toLocaleString();
+            $('#productModal').modal('show');
+        }
+
+        function addToCart() {
+            // Add the item to the cart
+            const quantity = document.getElementById('quantity').value;
+            // Get product details and update cart
+            // Here you can add functionality to update the sidebar cart with the selected product
+        }
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'all' || product.classList.contains(category)) {
+                    product.style.display = 'block';
                 } else {
-                    cartSidebar.classList.add('open');
-                    body.classList.add('sidebar-open');
+                    product.style.display = 'none';
                 }
-            }
-            function showProductDetails(productId, price) {
-                const modal = new bootstrap.Modal(document.getElementById('productModal'));
-                document.getElementById('productModalLabel').textContent = productId;
-                document.getElementById('productDescription').textContent = `Details for ${productId}`;
-                document.getElementById('productPrice').textContent = formatNumber(price);
-                modal.show();
-            }
-            function addToCart() {
-                const productId = document.getElementById('productModalLabel').textContent;
-                const price = parseFloat(document.getElementById('productPrice').textContent.replace(/,/g, ''));
-                const quantity = parseInt(document.getElementById('productQuantity').value);
-                const item = {
-                    id: productId,
-                    price: price,
-                    quantity: quantity
-                };
-                cart.push(item);
-                updateCart();
-                toggleCart(); // Close the cart sidebar after adding the item
-            }
-            function updateCart() {
-                const cartContent = document.getElementById('cartContent');
-                cartContent.innerHTML = ''; // Clear previous content
-                let total = 0;
-                cart.forEach(item => {
-                    total += item.price * item.quantity;
-                    cartContent.innerHTML += `
-                        <div class="cart-item">
-                            <div class="details">
-                                <img src="https://via.placeholder.com/50" alt="${item.id}">
-                                <div>
-                                    <h5>${item.id}</h5>
-                                    <p>Price: $${formatNumber(item.price)} x ${item.quantity}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                cartContent.innerHTML += `
-                    <div class="cart-item">
-                        <div class="details">
-                            <h5>Total</h5>
-                            <p>$${formatNumber(total.toFixed(2))}</p>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('cartCount').textContent = cart.length;
-            }
-            function checkout() {
-                alert('Proceed to checkout');
-            }
-            function filterProducts(category) {
-                document.querySelectorAll('.product').forEach(product => {
-                    if (category === 'all' || product.classList.contains(category)) {
-                        product.style.display = 'block';
-                    } else {
-                        product.style.display = 'none';
-                    }
-                });
-            }
-            document.addEventListener('DOMContentLoaded', function () {
-                // Initialize Bootstrap tabs
-                const tabTriggerList = document.querySelectorAll('#productTabs .nav-link');
-                tabTriggerList.forEach(tabTriggerEl => {
-                    const tabTrigger = new bootstrap.Tab(tabTriggerEl);
-                    tabTriggerEl.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        tabTrigger.show();
-                    });
-                });
             });
-        </script>
-    </body>
+        }
+        
+        function checkout() {
+            // Checkout functionality here
+        }
+    </script>
+</body>
 </html>
