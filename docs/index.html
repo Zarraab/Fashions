@@ -11,7 +11,7 @@
             background-color: #121212;
             color: #ffffff;
             position: relative;
-            overflow: hidden; /* Prevent scrolling when sidebar is open */
+            overflow: hidden;
         }
         .navbar {
             background-color: #1f1f1f;
@@ -210,7 +210,7 @@
                             <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
                             <div class="card-body">
                                 <h5 class="card-title">Laptop 1</h5>
-                                <p class="card-text">Powerful and sleek. Price: $1200</p>
+                                <p class="card-text">Powerful and sleek. Price: $1,200</p>
                                 <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
                             <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
                             <div class="card-body">
                                 <h5 class="card-title">Laptop 2</h5>
-                                <p class="card-text">Lightweight and portable. Price: $1500</p>
+                                <p class="card-text">Lightweight and portable. Price: $1,500</p>
                                 <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
                             </div>
                         </div>
@@ -231,19 +231,39 @@
                             <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
                             <div class="card-body">
                                 <h5 class="card-title">Smartphone 1</h5>
-                                <p class="card-text">Latest technology. Price: $800</p>
+                                <p class="card-text">High performance. Price: $800</p>
                                 <button class="btn btn-primary" onclick="showProductDetails('product3', 800)">View Details</button>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 product smartphones" id="product4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Smartphone 2</h5>
+                                <p class="card-text">Affordable and reliable. Price: $600</p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product4', 600)">View Details</button>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Accessories -->
-                    <div class="col-md-4 product accessories" id="product4">
+                    <div class="col-md-4 product accessories" id="product5">
                         <div class="card">
                             <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
                             <div class="card-body">
                                 <h5 class="card-title">Accessory 1</h5>
-                                <p class="card-text">Essential accessory. Price: $50</p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product4', 50)">View Details</button>
+                                <p class="card-text">Stylish and useful. Price: $50</p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product5', 50)">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 product accessories" id="product6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Accessory 2</h5>
+                                <p class="card-text">Premium quality. Price: $80</p>
+                                <button class="btn btn-primary" onclick="showProductDetails('product6', 80)">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -252,8 +272,23 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-icons">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-linkedin-in"></i>
+        </div>
+        <div class="payment-icons">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-paypal"></i>
+        </div>
+    </footer>
+
     <!-- Cart Sidebar -->
-    <div class="sidebar-cart" id="sidebarCart">
+    <div id="cartSidebar" class="sidebar-cart">
         <div class="sidebar-cart-header">
             <h4>Shopping Cart</h4>
             <button class="close-btn" onclick="toggleCart()">×</button>
@@ -266,7 +301,7 @@
         </div>
     </div>
 
-    <!-- Product Modal -->
+    <!-- Product Details Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -277,105 +312,69 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="productDescription"></p>
-                    <p>Price: $<span id="productPrice"></span></p>
-                    <input type="number" id="productQuantity" min="1" value="1">
+                    <div id="modalProductDetails">
+                        <!-- Product details will be dynamically added here -->
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" value="1" min="1">
+                    </div>
                     <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <div class="payment-icons">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-paypal"></i>
-            </div>
-            <p>&copy; 2024 TechShop. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
+    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         let cart = [];
-
-        function toggleCart() {
-            const cartSidebar = document.getElementById('sidebarCart');
-            const body = document.body;
-            if (cartSidebar.classList.contains('open')) {
-                cartSidebar.classList.remove('open');
-                body.classList.remove('sidebar-open');
-            } else {
-                cartSidebar.classList.add('open');
-                body.classList.add('sidebar-open');
-            }
-        }
+        let cartCount = 0;
 
         function showProductDetails(productId, price) {
-            const modal = new bootstrap.Modal(document.getElementById('productModal'));
-            document.getElementById('productModalLabel').textContent = productId;
-            document.getElementById('productDescription').textContent = `Details for ${productId}`;
-            document.getElementById('productPrice').textContent = price;
-            modal.show();
+            const priceFormatted = price.toLocaleString();
+            const productDetails = `
+                <h5>Product ${productId.slice(-1)}</h5>
+                <p>Price: $${priceFormatted}</p>
+            `;
+            document.getElementById('modalProductDetails').innerHTML = productDetails;
+            $('#productModal').modal('show');
         }
 
         function addToCart() {
-            const productId = document.getElementById('productModalLabel').textContent;
-            const price = parseFloat(document.getElementById('productPrice').textContent);
-            const quantity = parseInt(document.getElementById('productQuantity').value);
-            const item = {
-                id: productId,
-                price: price,
-                quantity: quantity
-            };
-            cart.push(item);
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            const priceText = document.getElementById('modalProductDetails').innerHTML.match(/Price: \$([\d,]+)/)[1];
+            const price = parseInt(priceText.replace(/,/g, ''), 10);
+
+            cart.push({ price, quantity });
+            cartCount += quantity;
             updateCart();
-            toggleCart(); // Close the cart sidebar after adding the item
+            $('#productModal').modal('hide');
         }
 
         function updateCart() {
-            const cartContent = document.getElementById('cartContent');
-            cartContent.innerHTML = ''; // Clear previous content
-            let total = 0;
-            cart.forEach(item => {
-                total += item.price * item.quantity;
-                cartContent.innerHTML += `
+            const cartContent = cart.map(item => {
+                const totalPrice = (item.price * item.quantity).toLocaleString();
+                return `
                     <div class="cart-item">
                         <div class="details">
-                            <img src="https://via.placeholder.com/50" alt="${item.id}">
-                            <div>
-                                <h5>${item.id}</h5>
-                                <p>Price: $${item.price} x ${item.quantity}</p>
-                            </div>
+                            <h5>Product</h5>
+                            <p>Quantity: ${item.quantity}</p>
+                            <p>Total: $${totalPrice}</p>
                         </div>
                     </div>
                 `;
-            });
-            cartContent.innerHTML += `
-                <div class="cart-item">
-                    <div class="details">
-                        <h5>Total</h5>
-                        <p>$${total.toFixed(2)}</p>
-                    </div>
-                </div>
-            `;
-            document.getElementById('cartCount').textContent = cart.length;
+            }).join('');
+
+            document.getElementById('cartContent').innerHTML = cartContent;
+            document.getElementById('cartCount').textContent = cartCount;
         }
 
-        function checkout() {
-            alert('Proceed to checkout');
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+            document.body.classList.toggle('sidebar-open');
         }
 
         function filterProducts(category) {
@@ -386,6 +385,10 @@
                     product.style.display = 'none';
                 }
             });
+        }
+
+        function checkout() {
+            alert('Proceeding to checkout...');
         }
     </script>
 </body>
