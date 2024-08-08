@@ -151,6 +151,9 @@
             padding: 15px;
             background-color: #2a2a2a;
         }
+        .badge {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -205,7 +208,11 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Laptop 1</h5>
                                     <p class="card-text">Powerful and sleek. Price: $<span class="price">1200</span></p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
+                                    <div>
+                                        <span class="badge badge-primary">Laptops</span>
+                                        <span class="badge badge-secondary">Featured</span>
+                                    </div>
+                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product1', 1200)">View Details</button>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +222,23 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Laptop 2</h5>
                                     <p class="card-text">High performance. Price: $<span class="price">1500</span></p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
+                                    <div>
+                                        <span class="badge badge-primary">Laptops</span>
+                                    </div>
+                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product2', 1500)">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 product smartphones" id="product3">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Smartphone 1</h5>
+                                    <p class="card-text">Latest model. Price: $<span class="price">800</span></p>
+                                    <div>
+                                        <span class="badge badge-success">Smartphones</span>
+                                    </div>
+                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product3', 800)">View Details</button>
                                 </div>
                             </div>
                         </div>
