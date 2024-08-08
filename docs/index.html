@@ -14,6 +14,9 @@
         .navbar {
             background-color: #1f1f1f;
         }
+        .navbar-brand img {
+            height: 50px;
+        }
         .card {
             background-color: #2a2a2a;
             border: none;
@@ -163,6 +166,41 @@
         <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
+    <!-- Navbar with Logo -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="https://via.placeholder.com/150x50" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cartCount" class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Tabs Navigation -->
     <div class="container my-4">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -201,31 +239,31 @@
             <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
                 <!-- Products content -->
                 <section class="container my-5">
+                    <h2 class="text-center">Our Products</h2>
                     <div class="row">
                         <div class="col-md-4 product laptops" id="product1">
                             <div class="card">
                                 <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Laptop 1</h5>
-                                    <p class="card-text">Powerful and sleek. Price: $<span class="price">1200</span></p>
+                                    <p class="card-text">High performance laptop. Price: $<span class="price">1500</span></p>
                                     <div>
-                                        <span class="badge badge-primary">Laptops</span>
-                                        <span class="badge badge-secondary">Featured</span>
+                                        <span class="badge badge-success">Laptops</span>
                                     </div>
-                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product1', 1200)">View Details</button>
+                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product1', 1500)">View Details</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 product laptops" id="product2">
+                        <div class="col-md-4 product smartphones" id="product2">
                             <div class="card">
-                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
+                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
                                 <div class="card-body">
-                                    <h5 class="card-title">Laptop 2</h5>
-                                    <p class="card-text">High performance. Price: $<span class="price">1500</span></p>
+                                    <h5 class="card-title">Smartphone 1</h5>
+                                    <p class="card-text">Latest smartphone. Price: $<span class="price">800</span></p>
                                     <div>
-                                        <span class="badge badge-primary">Laptops</span>
+                                        <span class="badge badge-success">Smartphones</span>
                                     </div>
-                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product2', 1500)">View Details</button>
+                                    <button class="btn btn-primary mt-2" onclick="showProductDetails('product2', 800)">View Details</button>
                                 </div>
                             </div>
                         </div>
