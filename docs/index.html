@@ -10,8 +10,6 @@
         body {
             background-color: #121212;
             color: #ffffff;
-            position: relative;
-            /*overflow: hidden;*/ /* Prevent scrolling when sidebar is open */
         }
         .navbar {
             background-color: #1f1f1f;
@@ -81,13 +79,13 @@
             transform: translateX(100%);
             transition: transform 0.3s ease;
             z-index: 1000;
-            overflow-y: auto; /* Allows vertical scrolling inside the sidebar */
+            overflow-y: auto;
         }
         .sidebar-cart.open {
             transform: translateX(0);
         }
         body.sidebar-open {
-            overflow: hidden; /* Prevent scrolling of the body when sidebar is open */
+            overflow: hidden;
         }
         .sidebar-cart-header {
             padding: 15px;
@@ -233,167 +231,123 @@
                             <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
                             <div class="card-body">
                                 <h5 class="card-title">Laptop 2</h5>
-                                <p class="card-text">Lightweight and portable. Price: $<span class="price">1500</span></p>
+                                <p class="card-text">High performance. Price: $<span class="price">1500</span></p>
                                 <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Smartphones -->
-                    <div class="col-md-4 product smartphones" id="product3">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Smartphone 1</h5>
-                                <p class="card-text">Latest model with great features. Price: $<span class="price">800</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product3', 800)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 product smartphones" id="product4">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Smartphone 2</h5>
-                                <p class="card-text">Affordable and reliable. Price: $<span class="price">500</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product4', 500)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Accessories -->
-                    <div class="col-md-4 product accessories" id="product5">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Accessory 1</h5>
-                                <p class="card-text">Essential for your devices. Price: $<span class="price">50</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product5', 50)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 product accessories" id="product6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Accessory 2</h5>
-                                <p class="card-text">High-quality and durable. Price: $<span class="price">75</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product6', 75)">View Details</button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Add more products as needed -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer Section -->
+    <!-- Sidebar Cart -->
+    <div id="sidebarCart" class="sidebar-cart">
+        <div class="sidebar-cart-header">
+            <h4>Cart</h4>
+            <button class="btn btn-danger btn-sm" onclick="toggleCart()">Close</button>
+        </div>
+        <div id="cartContent" class="sidebar-cart-content">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="sidebar-cart-footer">
+            <button class="btn btn-danger" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="productDescription"></div>
+                    <div>
+                        <label for="productQuantity">Quantity:</label>
+                        <input type="number" id="productQuantity" value="1" min="1">
+                    </div>
+                    <button class="btn btn-primary mt-2" onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
+        <div>
+            <span>&copy; 2024 TechShop</span>
+        </div>
         <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-linkedin-in"></i>
         </div>
         <div class="payment-icons">
             <i class="fab fa-cc-visa"></i>
             <i class="fab fa-cc-mastercard"></i>
-            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
         </div>
     </footer>
 
-    <!-- Sidebar Cart -->
-    <div class="sidebar-cart" id="sidebarCart">
-        <div class="sidebar-cart-header">
-            <h4>Shopping Cart</h4>
-            <button class="close" onclick="toggleCart()">&times;</button>
-        </div>
-        <div class="sidebar-cart-content" id="cartItems">
-            <!-- Cart items will be added dynamically here -->
-        </div>
-        <div class="sidebar-cart-footer">
-            <button onclick="checkout()">Checkout</button>
-        </div>
-    </div>
-
-<!-- Product Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="productModalLabel">Product Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="productTabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="specs-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="false">Specifications</a>
-                    </li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                        <p id="productDescription">Product description goes here.</p>
-                    </div>
-                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                        <p id="productReviews">Product reviews go here.</p>
-                    </div>
-                    <div class="tab-pane fade" id="specs" role="tabpanel" aria-labelledby="specs-tab">
-                        <p id="productSpecs">Product specifications go here.</p>
-                    </div>
-                </div>
-                <p>Price: $<span id="productPrice"></span></p>
-                <input type="number" id="productQuantity" min="1" value="1">
-                <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-</div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        function formatPrice(price) {
-            return price.toLocaleString();
+        // Toggle Cart Sidebar
+        function toggleCart() {
+            document.getElementById('sidebarCart').classList.toggle('open');
+            document.body.classList.toggle('sidebar-open');
         }
 
+        // Show Product Details in Modal
         function showProductDetails(productId, price) {
-            var productName = document.querySelector('#' + productId + ' .card-title').innerText;
-            var productImage = document.querySelector('#' + productId + ' .card-img-top').src;
-            var formattedPrice = formatPrice(price);
+            var productName = document.querySelector(`#${productId} .card-title`).innerText;
+            var productDescription = document.querySelector(`#${productId} .card-text`).innerText;
 
-            document.getElementById('productDetails').innerHTML = `
-                <img src="${productImage}" class="img-fluid" alt="${productName}">
-                <h5>${productName}</h5>
-                <p>Price: $${formattedPrice}</p>
-            `;
+            document.getElementById('productModalLabel').innerText = productName;
+            document.getElementById('productDescription').innerText = productDescription;
+            document.querySelector('#productModal .modal-body .price').innerText = price;
+            
             $('#productModal').modal('show');
         }
 
+        // Add to Cart Function
         function addToCart() {
-            var quantity = parseInt(document.getElementById('quantity').value);
-            // Add product to cart logic here
-            var cartCount = parseInt(document.getElementById('cartCount').innerText);
-            document.getElementById('cartCount').innerText = cartCount + quantity;
+            var quantity = parseInt(document.getElementById('productQuantity').value, 10);
+            var productName = document.getElementById('productModalLabel').innerText;
+            var price = parseFloat(document.querySelector('#productModal .modal-body .price').innerText);
+            var total = quantity * price;
 
-            // Close modal
+            var cartContent = document.getElementById('cartContent');
+            var item = document.createElement('div');
+            item.className = 'cart-item';
+            item.innerHTML = `
+                <div class="details">
+                    <h5>${productName}</h5>
+                    <p>Quantity: ${quantity} | Total: $${total.toFixed(2)}</p>
+                </div>
+            `;
+            cartContent.appendChild(item);
+
+            var cartCount = document.getElementById('cartCount');
+            cartCount.innerText = parseInt(cartCount.innerText) + quantity;
+
             $('#productModal').modal('hide');
         }
 
-        function toggleCart() {
-            var cart = document.getElementById('sidebarCart');
-            var isOpen = cart.classList.contains('open');
-            cart.classList.toggle('open', !isOpen);
-            document.body.classList.toggle('sidebar-open', !isOpen);
+        // Checkout Function
+        function checkout() {
+            alert('Checkout functionality is not implemented yet.');
         }
 
+        // Filter Products by Category
         function filterProducts(category) {
             var products = document.querySelectorAll('.product');
             products.forEach(function(product) {
@@ -404,28 +358,6 @@
                 }
             });
         }
-
-        function checkout() {
-            alert('Proceeding to checkout...');
-        }
-
-        // Format all prices on page load
-        document.querySelectorAll('.price').forEach(function(priceElement) {
-            var price = parseInt(priceElement.innerText.replace(/,/g, ''));
-            priceElement.innerText = formatPrice(price);
-        });
-/*
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize Bootstrap tabs
-            const tabTriggerList = document.querySelectorAll('#productTabs .nav-link');
-            tabTriggerList.forEach(tabTriggerEl => {
-                const tabTrigger = new bootstrap.Tab(tabTriggerEl);
-                tabTriggerEl.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    tabTrigger.show();
-                });
-            });
-        });*/
     </script>
 </body>
 </html>
