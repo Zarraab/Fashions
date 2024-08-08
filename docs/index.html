@@ -414,18 +414,18 @@
             var price = parseInt(priceElement.innerText.replace(/,/g, ''));
             priceElement.innerText = formatPrice(price);
         });
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Bootstrap tabs
-    const tabTriggerList = document.querySelectorAll('#productTabs .nav-link');
-    tabTriggerList.forEach(tabTriggerEl => {
-        const tabTrigger = new bootstrap.Tab(tabTriggerEl);
-        tabTriggerEl.addEventListener('click', function (event) {
-            event.preventDefault();
-            tabTrigger.show();
-        });
-    });
-});
-
+/*
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Bootstrap tabs
+            const tabTriggerList = document.querySelectorAll('#productTabs .nav-link');
+            tabTriggerList.forEach(tabTriggerEl => {
+                const tabTrigger = new bootstrap.Tab(tabTriggerEl);
+                tabTriggerEl.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    tabTrigger.show();
+                });
+            });
+        });*/
     </script>
 </body>
 </html>
