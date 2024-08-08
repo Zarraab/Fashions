@@ -160,87 +160,102 @@
         <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">TechShop</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link cart-icon" onclick="toggleCart()">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cartCount" class="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Header Section -->
-    <header class="jumbotron jumbotron-fluid text-center" style="background-color: rgba(31, 31, 31, 0.7);">
-        <div class="container">
-            <h1 class="display-4">Welcome to TechShop</h1>
-            <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
-        </div>
-    </header>
-
-    <!-- Categories Section -->
-    <section class="container my-5">
-        <div class="row">
-            <div class="col-md-3">
-                <h5>Categories</h5>
-                <ul class="list-group">
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">All</li>
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">Laptops</li>
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">Smartphones</li>
-                    <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">Accessories</li>
-                </ul>
+    <!-- Tabs Navigation -->
+    <div class="container my-4">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="false">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <!-- Home content -->
+                <header class="jumbotron jumbotron-fluid text-center" style="background-color: rgba(31, 31, 31, 0.7);">
+                    <div class="container">
+                        <h1 class="display-4">Welcome to TechShop</h1>
+                        <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
+                    </div>
+                </header>
             </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <!-- Laptops -->
-                    <div class="col-md-4 product laptops" id="product1">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Laptop 1</h5>
-                                <p class="card-text">Powerful and sleek. Price: $<span class="price">1200</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
+            <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+                <!-- Products content -->
+                <section class="container my-5">
+                    <div class="row">
+                        <div class="col-md-4 product laptops" id="product1">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Laptop 1</h5>
+                                    <p class="card-text">Powerful and sleek. Price: $<span class="price">1200</span></p>
+                                    <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 product laptops" id="product2">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Laptop 2</h5>
-                                <p class="card-text">High performance. Price: $<span class="price">1500</span></p>
-                                <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
+                        <div class="col-md-4 product laptops" id="product2">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
+                                <div class="card-body">
+                                    <h5 class="card-title">Laptop 2</h5>
+                                    <p class="card-text">High performance. Price: $<span class="price">1500</span></p>
+                                    <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
+                                </div>
                             </div>
                         </div>
+                        <!-- Add more products as needed -->
                     </div>
-                    <!-- Add more products as needed -->
+                </section>
+            </div>
+            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <!-- About content -->
+                <div class="container my-5">
+                    <h2>About Us</h2>
+                    <p>Learn more about our company and mission.</p>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <!-- Contact content -->
+                <div class="container my-5">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with us through our contact form.</p>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <!-- Login content -->
+                <div class="container my-5">
+                    <h2>Login</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Sidebar Cart -->
     <div id="sidebarCart" class="sidebar-cart">
