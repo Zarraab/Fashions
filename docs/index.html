@@ -43,6 +43,7 @@
             }
             .cart-icon {
                 position: relative;
+                cursor: pointer;
             }
             .cart-count {
                 position: absolute;
@@ -67,6 +68,70 @@
                 width: 100%;
                 height: 100%;
                 border: 0;
+            }
+            .sidebar-cart {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 300px;
+                height: 100%;
+                background-color: #1f1f1f;
+                color: #ffffff;
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+            .sidebar-cart.open {
+                transform: translateX(0);
+            }
+            .sidebar-cart-header {
+                padding: 15px;
+                border-bottom: 1px solid #2a2a2a;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .sidebar-cart-header h4 {
+                margin: 0;
+            }
+            .sidebar-cart-content {
+                padding: 15px;
+                overflow-y: auto;
+                height: calc(100% - 60px);
+            }
+            .cart-item {
+                margin-bottom: 10px;
+            }
+            .cart-item img {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                margin-right: 10px;
+            }
+            .cart-item .details {
+                display: flex;
+                align-items: center;
+            }
+            .cart-item .details h5 {
+                margin: 0;
+            }
+            .cart-item .details p {
+                margin: 0;
+                font-size: 0.875rem;
+                color: #a9a9a9;
+            }
+            .sidebar-cart-footer {
+                padding: 15px;
+                border-top: 1px solid #2a2a2a;
+                text-align: center;
+            }
+            .sidebar-cart-footer button {
+                background-color: #dc3545;
+                color: #ffffff;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
             }
         </style>
     </head>
@@ -99,7 +164,7 @@
                         <a class="nav-link" href="#">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link cart-icon" href="#">
+                        <a class="nav-link cart-icon" onclick="toggleCart()">
                             <i class="fas fa-shopping-cart"></i>
                             <span id="cartCount" class="cart-count">0</span>
                         </a>
@@ -216,6 +281,20 @@
                 </div>
             </div>
         </div>
+        <!-- Sidebar Cart -->
+        <div id="sidebarCart" class="sidebar-cart">
+            <div class="sidebar-cart-header">
+                <h4>Cart</h4>
+                <button type="button" class="close" onclick="toggleCart()">&times;</button>
+            </div>
+            <div class="sidebar-cart-content">
+                <!-- Cart items will be dynamically added here -->
+                <div id="cartItems"></div>
+            </div>
+            <div class="sidebar-cart-footer">
+                <button onclick="checkout()">Checkout</button>
+            </div>
+        </div>
         <!-- Footer Section -->
         <footer class="footer">
             <div class="container">
@@ -245,6 +324,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
+            let cart = [];
             let cartCount = 0;
             function filterProducts(category) {
                 var allProducts = document.querySelectorAll('.product');
@@ -268,9 +348,42 @@
                 $('#productModal').modal('show');
             }
             function addToCart(productId) {
+                var product = document.getElementById(productId);
+                var title = product.querySelector('.card-title').innerText;
+                var image = product.querySelector('.card-img-top').src;
+                var item = {
+                    id: productId,
+                    title: title,
+                    image: image
+                };
+                cart.push(item);
                 cartCount++;
                 document.getElementById('cartCount').innerText = cartCount;
+                updateCartSidebar();
                 $('#productModal').modal('hide');
+            }
+            function toggleCart() {
+                var cartSidebar = document.getElementById('sidebarCart');
+                cartSidebar.classList.toggle('open');
+            }
+            function updateCartSidebar() {
+                var cartItemsContainer = document.getElementById('cartItems');
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(function(item) {
+                    var cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item d-flex align-items-center';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="details">
+                            <h5>${item.title}</h5>
+                            <p>Item</p>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+            }
+            function checkout() {
+                alert('Proceeding to checkout!');
             }
         </script>
     </body>
