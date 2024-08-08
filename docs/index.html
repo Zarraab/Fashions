@@ -168,6 +168,7 @@
 
     <!-- Navbar with Logo -->
 <!-- Header with Logo and Navigation -->
+<!-- Header with Logo and Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#"><img src="https://via.placeholder.com/150x50" alt="Logo" class="logo"></a>
     <ul class="navbar-nav mr-auto">
@@ -183,11 +184,15 @@
         <li class="nav-item">
             <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" id="loginLink">Login</a>
         </li>
+        <li class="nav-item d-none" id="account-item">
+            <a class="nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" id="accountLink">Account</a>
+        </li>
         <li class="nav-item d-none" id="logout-item">
             <a class="nav-link" href="#" onclick="logout()">Logout</a>
         </li>
     </ul>
 </nav>
+
 
 
     <!-- Tabs Navigation -->
@@ -439,9 +444,16 @@ function handleLogin(event) {
 
         // Update UI for logged-in state
         document.getElementById('loginLink').classList.add('d-none');
+        document.getElementById('account-item').classList.remove('d-none');
         document.getElementById('logout-item').classList.remove('d-none');
         document.getElementById('login').classList.add('d-none');
         document.getElementById('products').classList.remove('d-none');
+
+        // Update tab link text
+        document.getElementById('login-tab').innerText = 'Account';
+        document.getElementById('login-tab').id = 'account-tab';
+        document.getElementById('accountLink').id = 'account-tab';
+        document.getElementById('account-item').style.display = 'block';
 
     } else {
         loginMessage.innerText = 'Invalid username or password';
@@ -453,11 +465,15 @@ function handleLogin(event) {
 function logout() {
     // Update UI for logged-out state
     document.getElementById('loginLink').classList.remove('d-none');
+    document.getElementById('account-item').classList.add('d-none');
     document.getElementById('logout-item').classList.add('d-none');
     document.getElementById('login').classList.remove('d-none');
     document.getElementById('products').classList.add('d-none');
 
-    // Optionally clear user session or perform other logout operations here
+    // Reset tab link text
+    document.getElementById('account-tab').innerText = 'Login';
+    document.getElementById('account-tab').id = 'login-tab';
+    document.getElementById('loginLink').id = 'login-tab';
 }
 
 // Initialize the UI based on login status
@@ -467,16 +483,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (isLoggedIn) {
         document.getElementById('loginLink').classList.add('d-none');
+        document.getElementById('account-item').classList.remove('d-none');
         document.getElementById('logout-item').classList.remove('d-none');
         document.getElementById('login').classList.add('d-none');
         document.getElementById('products').classList.remove('d-none');
     } else {
         document.getElementById('loginLink').classList.remove('d-none');
+        document.getElementById('account-item').classList.add('d-none');
         document.getElementById('logout-item').classList.add('d-none');
         document.getElementById('login').classList.remove('d-none');
         document.getElementById('products').classList.add('d-none');
     }
 });
+
 
     </script>
 </body>
