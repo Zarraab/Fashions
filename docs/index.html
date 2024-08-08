@@ -3,9 +3,7 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>
-        High Tech eCommerce
-      </title>
+      <title>High Tech eCommerce</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <style>
           body {
@@ -29,6 +27,10 @@
               text-align: center;
               color: #a9a9a9;
           }
+          .modal-content {
+              background-color: #2a2a2a;
+              color: #ffffff;
+          }
       </style>
       <script>
           function filterProducts(category) {
@@ -41,23 +43,23 @@
                   }
               });
           }
+          function showProductDetails(productId) {
+              var product = document.getElementById(productId);
+              var modalTitle = product.querySelector('.card-title').innerText;
+              var modalImage = product.querySelector('.card-img-top').src;
+              var modalDescription = product.querySelector('.card-text').innerText;
+              document.getElementById('productModalLabel').innerText = modalTitle;
+              document.getElementById('productModalImage').src = modalImage;
+              document.getElementById('productModalDescription').innerText = modalDescription;
+              $('#productModal').modal('show');
+          }
       </script>
   </head>
   <body>
       <!-- Navigation Bar -->
       <nav class="navbar navbar-expand-lg navbar-dark">
-          <a class="navbar-brand" href="#">
-            TechShop
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <a class="navbar-brand" href="#">TechShop</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -93,82 +95,74 @@
               <div class="col-md-3">
                   <h5>Categories</h5>
                   <ul class="list-group">
-                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">
-                        All
-                      </li>
-                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">
-                        Laptops
-                      </li>
-                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">
-                        Smartphones
-                      </li>
-                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">
-                        Accessories
-                      </li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">All</li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">Laptops</li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">Smartphones</li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">Accessories</li>
                   </ul>
               </div>
               <div class="col-md-9">
                   <div class="row">
                       <!-- Laptops -->
-                      <div class="col-md-4 product laptops">
+                      <div class="col-md-4 product laptops" id="product1">
                           <div class="card">
                               <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
                               <div class="card-body">
                                   <h5 class="card-title">Laptop 1</h5>
                                   <p class="card-text">High performance laptop.</p>
-                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                                  <button class="btn btn-primary" onclick="showProductDetails('product1')">View Details</button>
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-4 product laptops">
+                      <div class="col-md-4 product laptops" id="product2">
                           <div class="card">
                               <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
                               <div class="card-body">
                                   <h5 class="card-title">Laptop 2</h5>
                                   <p class="card-text">Lightweight and portable.</p>
-                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                                  <button class="btn btn-primary" onclick="showProductDetails('product2')">View Details</button>
                               </div>
                           </div>
                       </div>
                       <!-- Smartphones -->
-                      <div class="col-md-4 product smartphones">
+                      <div class="col-md-4 product smartphones" id="product3">
                           <div class="card">
                               <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
                               <div class="card-body">
                                   <h5 class="card-title">Smartphone 1</h5>
                                   <p class="card-text">Latest model smartphone.</p>
-                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                                  <button class="btn btn-primary" onclick="showProductDetails('product3')">View Details</button>
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-4 product smartphones">
+                      <div class="col-md-4 product smartphones" id="product4">
                           <div class="card">
                               <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 2">
                               <div class="card-body">
                                   <h5 class="card-title">Smartphone 2</h5>
                                   <p class="card-text">High resolution camera.</p>
-                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                                  <button class="btn btn-primary" onclick="showProductDetails('product4')">View Details</button>
                               </div>
                           </div>
                       </div>
                       <!-- Accessories -->
-                      <div class="col-md-4 product accessories">
+                      <div class="col-md-4 product accessories" id="product5">
                           <div class="card">
                               <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
                               <div class="card-body">
                                   <h5 class="card-title">Accessory 1</h5>
                                   <p class="card-text">Useful gadget accessory.</p>
-                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                                  <button class="btn btn-primary" onclick="showProductDetails('product5')">View Details</button>
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-4 product accessories">
+                      <div class="col-md-4 product accessories" id="product6">
                           <div class="card">
                               <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 2">
                               <div class="card-body">
                                   <h5 class="card-title">Accessory 2</h5>
                                   <p class="card-text">Stylish and functional.</p>
-                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                                  <button class="btn btn-primary" onclick="showProductDetails('product6')">View Details</button>
                               </div>
                           </div>
                       </div>
@@ -176,6 +170,27 @@
               </div>
           </div>
       </section>
+      <!-- Product Detail Modal -->
+      <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="productModalLabel">Product Title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <img id="productModalImage" src="" class="img-fluid" alt="Product Image">
+                      <p id="productModalDescription" class="mt-3">Product Description</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Add to Cart</button>
+                  </div>
+              </div>
+          </div>
+      </div>
       <!-- Footer Section -->
       <footer class="footer">
           <div class="container">
