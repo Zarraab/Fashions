@@ -81,9 +81,13 @@
                 transform: translateX(100%);
                 transition: transform 0.3s ease;
                 z-index: 1000;
+                overflow-y: auto; /* Allows vertical scrolling inside the sidebar */
             }
             .sidebar-cart.open {
                 transform: translateX(0);
+            }
+            body.sidebar-open {
+                overflow: hidden; /* Prevent scrolling of the body when sidebar is open */
             }
             .sidebar-cart-header {
                 padding: 15px;
@@ -202,8 +206,8 @@
                                 <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Laptop 1</h5>
-                                    <p class="card-text">High performance laptop. Price: $1000</p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product1', 1000)">View Details</button>
+                                    <p class="card-text">Powerful and sleek. Price: $1200</p>
+                                    <button class="btn btn-primary" onclick="showProductDetails('product1', 1200)">View Details</button>
                                 </div>
                             </div>
                         </div>
@@ -212,8 +216,8 @@
                                 <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
                                 <div class="card-body">
                                     <h5 class="card-title">Laptop 2</h5>
-                                    <p class="card-text">Lightweight and portable. Price: $800</p>
-                                    <button class="btn btn-primary" onclick="showProductDetails('product2', 800)">View Details</button>
+                                    <p class="card-text">Lightweight and portable. Price: $1500</p>
+                                    <button class="btn btn-primary" onclick="showProductDetails('product2', 1500)">View Details</button>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +227,7 @@
                                 <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Smartphone 1</h5>
-                                    <p class="card-text">Latest model smartphone. Price: $600</p>
+                                    <p class="card-text">Latest model with great features. Price: $600</p>
                                     <button class="btn btn-primary" onclick="showProductDetails('product3', 600)">View Details</button>
                                 </div>
                             </div>
@@ -384,35 +388,34 @@
             }
             function showProductDetails(productId, price) {
                 var product = document.getElementById(productId);
-                var modalTitle = product.querySelector('.card-title').innerText;
-                var modalImage = product.querySelector('.card-img-top').src;
-                var modalDescription = product.querySelector('.card-text').innerText;
-                document.getElementById('productModalLabel').innerText = modalTitle;
-                document.getElementById('productModalImage').src = modalImage;
-                document.getElementById('productModalDescription').innerText = modalDescription;
-                document.getElementById('addToCartButton').setAttribute('onclick', `addToCart('${productId}', ${price})`);
-                // Initialize quantity input
-                document.getElementById('quantityInput').value = 1;
-                document.getElementById('finalPrice').innerText = `Final Price: $${price}`;
-                // Update the final price when quantity changes
-                document.getElementById('quantityInput').addEventListener('input', function() {
-                    const quantity = parseInt(this.value) || 1;
-                    const finalPrice = quantity * price;
-                    document.getElementById('finalPrice').innerText = `Final Price: $${finalPrice.toFixed(2)}`;
-                });
+                var title = product.querySelector('.card-title').innerText;
+                var description = product.querySelector('.card-text').innerText;
+                var image = product.querySelector('.card-img-top').src;
+                document.getElementById('productModalLabel').innerText = title;
+                document.getElementById('productModalDescription').innerText = description;
+                document.getElementById('productModalImage').src = image;
+                document.getElementById('finalPrice').innerText = `Final Price: $${price.toFixed(2)}`;
+                document.getElementById('addToCartButton').setAttribute('data-price', price);
+                
                 $('#productModal').modal('show');
             }
-            function addToCart(productId, price) {
-                var product = document.getElementById(productId);
-                var title = product.querySelector('.card-title').innerText;
+            document.getElementById('quantityInput').addEventListener('input', function() {
+                var price = parseFloat(document.getElementById('addToCartButton').getAttribute('data-price')) || 0;
                 var quantity = parseInt(document.getElementById('quantityInput').value) || 1;
                 var finalPrice = quantity * price;
-                // Add to cart
+                document.getElementById('finalPrice').innerText = `Final Price: $${finalPrice.toFixed(2)}`;
+            });
+            document.getElementById('addToCartButton').addEventListener('click', function() {
+                var productId = document.getElementById('productModalLabel').innerText;
+                var title = document.getElementById('productModalLabel').innerText;
+                var price = parseFloat(this.getAttribute('data-price')) || 0;
+                var quantity = parseInt(document.getElementById('quantityInput').value) || 1;
+                var finalPrice = quantity * price;
                 cart.push({ id: productId, title, quantity, finalPrice });
                 cartCount += quantity;
                 updateCartDisplay();
                 $('#productModal').modal('hide');
-            }
+            });
             function updateCartDisplay() {
                 document.getElementById('cartCount').innerText = cartCount;
                 var cartItemsContainer = document.getElementById('cartItems');
@@ -434,7 +437,14 @@
                 });
             }
             function toggleCart() {
-                document.getElementById('sidebarCart').classList.toggle('open');
+                var sidebar = document.getElementById('sidebarCart');
+                sidebar.classList.toggle('open');   
+                // Prevent body scrolling when sidebar is open
+                if (sidebar.classList.contains('open')) {
+                    document.body.classList.add('sidebar-open');
+                } else {
+                    document.body.classList.remove('sidebar-open');
+                }
             }
             function checkout() {
                 alert('Proceed to checkout');
