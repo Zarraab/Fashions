@@ -3,7 +3,9 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>High Tech eCommerce</title>
+      <title>
+        High Tech eCommerce
+      </title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <style>
           body {
@@ -28,11 +30,25 @@
               color: #a9a9a9;
           }
       </style>
+      <script>
+          function filterProducts(category) {
+              var allProducts = document.querySelectorAll('.product');
+              allProducts.forEach(function(product) {
+                  if (category === 'all' || product.classList.contains(category)) {
+                      product.style.display = 'block';
+                  } else {
+                      product.style.display = 'none';
+                  }
+              });
+          }
+      </script>
   </head>
   <body>
-        <!-- Navigation Bar -->
+      <!-- Navigation Bar -->
       <nav class="navbar navbar-expand-lg navbar-dark">
-          <a class="navbar-brand" href="#">TechShop</a>
+          <a class="navbar-brand" href="#">
+            TechShop
+          </a>
           <button
             class="navbar-toggler"
             type="button"
@@ -41,7 +57,7 @@
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            >
+          >
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -64,43 +80,97 @@
               </ul>
           </div>
       </nav>
-        <!-- Header Section -->
+      <!-- Header Section -->
       <header class="jumbotron jumbotron-fluid text-center" style="background-color: #1f1f1f;">
           <div class="container">
               <h1 class="display-4">Welcome to TechShop</h1>
               <p class="lead">Your one-stop shop for the latest tech gadgets and accessories</p>
           </div>
       </header>
-        <!-- Product Section -->
+      <!-- Categories Section -->
       <section class="container my-5">
           <div class="row">
-              <div class="col-md-4">
-                  <div class="card">
-                      <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 1">
-                      <div class="card-body">
-                          <h5 class="card-title">Product 1</h5>
-                          <p class="card-text">This is a short description of the product.</p>
-                          <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                  </div>
+              <div class="col-md-3">
+                  <h5>Categories</h5>
+                  <ul class="list-group">
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('all')">
+                        All
+                      </li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('laptops')">
+                        Laptops
+                      </li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('smartphones')">
+                        Smartphones
+                      </li>
+                      <li class="list-group-item bg-dark text-white" onclick="filterProducts('accessories')">
+                        Accessories
+                      </li>
+                  </ul>
               </div>
-              <div class="col-md-4">
-                  <div class="card">
-                      <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 2">
-                      <div class="card-body">
-                          <h5 class="card-title">Product 2</h5>
-                          <p class="card-text">This is a short description of the product.</p>
-                          <a href="#" class="btn btn-primary">Add to Cart</a>
+              <div class="col-md-9">
+                  <div class="row">
+                      <!-- Laptops -->
+                      <div class="col-md-4 product laptops">
+                          <div class="card">
+                              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 1">
+                              <div class="card-body">
+                                  <h5 class="card-title">Laptop 1</h5>
+                                  <p class="card-text">High performance laptop.</p>
+                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                              </div>
+                          </div>
                       </div>
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <div class="card">
-                      <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 3">
-                      <div class="card-body">
-                          <h5 class="card-title">Product 3</h5>
-                          <p class="card-text">This is a short description of the product.</p>
-                          <a href="#" class="btn btn-primary">Add to Cart</a>
+                      <div class="col-md-4 product laptops">
+                          <div class="card">
+                              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Laptop 2">
+                              <div class="card-body">
+                                  <h5 class="card-title">Laptop 2</h5>
+                                  <p class="card-text">Lightweight and portable.</p>
+                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Smartphones -->
+                      <div class="col-md-4 product smartphones">
+                          <div class="card">
+                              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 1">
+                              <div class="card-body">
+                                  <h5 class="card-title">Smartphone 1</h5>
+                                  <p class="card-text">Latest model smartphone.</p>
+                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 product smartphones">
+                          <div class="card">
+                              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Smartphone 2">
+                              <div class="card-body">
+                                  <h5 class="card-title">Smartphone 2</h5>
+                                  <p class="card-text">High resolution camera.</p>
+                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Accessories -->
+                      <div class="col-md-4 product accessories">
+                          <div class="card">
+                              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 1">
+                              <div class="card-body">
+                                  <h5 class="card-title">Accessory 1</h5>
+                                  <p class="card-text">Useful gadget accessory.</p>
+                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4 product accessories">
+                          <div class="card">
+                              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Accessory 2">
+                              <div class="card-body">
+                                  <h5 class="card-title">Accessory 2</h5>
+                                  <p class="card-text">Stylish and functional.</p>
+                                  <a href="#" class="btn btn-primary">Add to Cart</a>
+                              </div>
+                          </div>
                       </div>
                   </div>
               </div>
