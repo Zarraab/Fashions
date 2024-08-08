@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>High Tech eCommerce</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
       <style>
           body {
               background-color: #121212;
@@ -24,8 +25,15 @@
           .footer {
               background-color: #1f1f1f;
               padding: 20px 0;
-              text-align: center;
               color: #a9a9a9;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          .footer .social-icons i, .footer .payment-icons i {
+              margin-right: 15px;
+              font-size: 1.5rem;
+              color: #ffffff;
           }
           .modal-content {
               background-color: #2a2a2a;
@@ -194,7 +202,26 @@
       <!-- Footer Section -->
       <footer class="footer">
           <div class="container">
-              <p>&copy; 2024 TechShop. All Rights Reserved.</p>
+              <div class="row w-100">
+                  <div class="col-md-6">
+                      <div class="social-icons">
+                          <i class="fab fa-facebook-f"></i>
+                          <i class="fab fa-twitter"></i>
+                          <i class="fab fa-instagram"></i>
+                          <i class="fab fa-linkedin-in"></i>
+                          <i class="fab fa-youtube"></i>
+                      </div>
+                      <div class="payment-icons">
+                          <i class="fab fa-cc-visa"></i>
+                          <i class="fab fa-cc-mastercard"></i>
+                          <i class="fab fa-cc-paypal"></i>
+                          <i class="fab fa-cc-amex"></i>
+                      </div>
+                  </div>
+                  <div class="col-md-6 text-right">
+                      <p>&copy; 2024 TechShop. All Rights Reserved.</p>
+                  </div>
+              </div>
           </div>
       </footer>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
