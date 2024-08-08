@@ -302,7 +302,7 @@
                 <!-- Login content -->
                 <div class="container my-5">
                     <h2>Login</h2>
-                    <form>
+                    <form onsubmit="return handleLogin(event)">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="username" placeholder="Enter username">
@@ -312,6 +312,7 @@
                             <input type="password" class="form-control" id="password" placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
+                        <p id="loginMessage" class="mt-3"></p>
                     </form>
                 </div>
             </div>
@@ -433,6 +434,24 @@
                     product.style.display = 'none';
                 }
             });
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var loginMessage = document.getElementById('loginMessage');
+
+            if (username === 'admin' && password === 'admin') {
+                loginMessage.innerText = 'Login successful!';
+                loginMessage.style.color = 'green';
+                // Redirect or perform further actions here
+            } else {
+                loginMessage.innerText = 'Invalid username or password';
+                loginMessage.style.color = 'red';
+            }
         }
     </script>
 </body>
