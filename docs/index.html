@@ -436,6 +436,7 @@
                     cartItemsContainer.appendChild(itemElement);
                 });
             }
+            /**
             function toggleCart() {
                 var sidebar = document.getElementById('sidebarCart');
                 sidebar.classList.toggle('open');   
@@ -446,6 +447,19 @@
                     document.body.classList.remove('sidebar-open');
                 }
             }
+            **/
+            function toggleCart() {
+                var sidebar = document.getElementById('sidebarCart');
+                sidebar.classList.toggle('open');
+                
+                // Prevent body scrolling when sidebar is open
+                if (sidebar.classList.contains('open')) {
+                    document.body.classList.add('sidebar-open');
+                } else {
+                    document.body.classList.remove('sidebar-open');
+                }
+            }
+
             function checkout() {
                 alert('Proceed to checkout');
             }
