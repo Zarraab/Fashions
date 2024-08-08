@@ -11,7 +11,7 @@
             background-color: #121212;
             color: #ffffff;
             position: relative;
-            /*overflow: none;*/
+            overflow: hidden;
         }
         .navbar {
             background-color: #1f1f1f;
@@ -146,7 +146,7 @@
 
     <!-- Background Video -->
     <div class="background-video">
-        <iframe src="https://www.youtube.com/embed/hHqW0gtiMy4?autoplay=1&loop=1&playlist=hHqW0gtiMy4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
     <!-- Navigation Bar -->
@@ -288,7 +288,7 @@
     </footer>
 
     <!-- Cart Sidebar -->
-    <div class="sidebar-cart" id="sidebarCart">
+    <div id="cartSidebar" class="sidebar-cart">
         <div class="sidebar-cart-header">
             <h4>Shopping Cart</h4>
             <button class="close-btn" onclick="toggleCart()">×</button>
@@ -300,7 +300,6 @@
             <button onclick="checkout()">Checkout</button>
         </div>
     </div>
-
 
     <!-- Product Details Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
