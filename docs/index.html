@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <!-- Base of Application -->
+    <base target="_top">
+        
+    <!-- Automatic Reload Meta Tag -->
+    <!--
+    <meta http-equiv="refresh" content="100"> 0.00000001
+    -->
+    
+    <!-- Other Meta Tags (SEO, Open Graph, Twitter, etc.) -->
+    <meta name="description" content="Zarraab Trading - High-Tech eCommerce platform offering a wide range of products.">
+    <meta name="keywords" content="Zarraab Trading, eCommerce, high-tech, online shopping, new arrivals, product categories">
+    <meta name="author" content="Zarraab Trading">
+    
+    <!-- Favicon -->
+    <!-- favicon.ico -->
+    <link rel="icon" type="image/x-icon" href="https://drive.google.com/file/d/1fH1XRBPM8SCtRcAEkS4bqdQ0syQ38LhN/view?usp=sharing">
+    <link rel="icon" type="image/x-icon" href="https://drive.google.com/file/d/1fH1XRBPM8SCtRcAEkS4bqdQ0syQ38LhN/view?usp=sharing">
+    <link rel="icon" type="image/x-icon" href="https://drive.google.com/file/d/1fH1XRBPM8SCtRcAEkS4bqdQ0syQ38LhN/view?usp=sharing">
+
+    <script src="script.js" defer></script>
+    
+    <!-- Type of Document Meta Tag -->
+    <meta charset="UTF-8">
+
+    <!-- Type of Application View in Device Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of Web Application -->
+    <title>Zarraab Fashion</title>
+
+    <style>
+      /* General Styles */
+      /* Root Variables */
+      :root {
+        --main-color: saddlebrown;
+        --main-bgcolor: gold;
+        --main-font: sans-serif;
+        // Some
+        --header-bgcolor: #333;
+        --footer-bgcolor: #333;
+        --text-color: #fff;
+        --button-bgcolor: #f39c12;
+        --button-hover-color: #e67e22;
+        //
+        --border-color: #ddd;
+        //
+        --card-bgcolor: #fff;
+        --card-border-color: #ddd;
+        //
+      }
+      /* Global Styles */
+      body {
+       font-family: Arial, sans-serif;
+       background-color: #f9f9f9;
+       color: #333;
+       margin: 0;
+       padding: 0;
+       border-top-style: solid 0px;
+       border-bottom-style: solid 0px;
+      }
+
+      /* Header */
+      header {
+       //background-color: #333;
+       //color: #fff;
+       //padding: 10px 20px;
+       //display: flex;
+       //align-items: center;
+       //justify-content: space-between;
+       //position: relative;
+       border-top-style: solid;
+       //border-bottom-style: solid;
+       //
+       background-color: var(--header-bgcolor);
+       color: var(--text-color);
+       padding: 10px 20px;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       position: fixed;
+       width: 100%;
+       top: 0;
+       z-index: 1000;
+       border-bottom: 1px solid var(--border-color);
+      }
+      .header-container {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       background-color: #333;
+       color: white;
+       padding: 10px;
+      }
+      header, nav, main, footer {
+       padding: 20px;
+       background-color: #333;
+       color: white;
+       margin-bottom: auto;
+       overflow: hidden;
+      }
+
+      /* Logo */
+      .logo {
+       font-size: 1.5em;
+       img-size: 20px
+      }
+
+      /* Search Box */
+      .search-bar {
+       flex-grow: 2;
+       margin: 0 20px;
+      }
+      .search-bar input {
+       width: 100%;
+       padding: 8px;
+       border: none;
+       border-radius: 5px;
+       font-size: 16px;
+      }
+
+      /* Navigation */
+      nav {
+       text-align: right;
+      }
+      nav a {
+       color: #fff;
+       text-decoration: none;
+       margin: 0 10px;
+       padding: 5px;
+      }
+      nav a:hover {
+       background-color: #555;
+      }
+      .nav-bar a {
+       color: white;
+       text-decoration: none;
+       margin: 0 15px;
+      }
+
+      /* Main or Product Area */
+      /*
+      .main {
+       display: flex;
+       margin: 20px;
+      }
+      #main-content {
+       display: flex;
+       padding: 20px;
+      }
+      .new-arrivals {
+       width: 30%;
+      }
+      .new-arrivals img {
+       width: 100%;
+       height: auto;
+      }
+      */
+      
+      .content {
+       width: 70%;
+       display: flex;
+      }
+
+      .sidebar {
+       width: 25%;
+       padding-right: 20px;
+      }
+      
+      .sidebar input {
+       width: 100%;
+       padding: 8px;
+       margin-bottom: 20px;
+      }
+      
+      .page-content {
+       width: 75%;
+      }
+
+      .product {
+       background-color: transparent;
+       padding: 10px;
+       margin: -9px 11px 0px 0px;
+       border-radius: 5px;
+       color: white;
+       border: 1px solid #ddd;
+       margin-bottom: 20px;
+       float: left;
+       display: grid;
+       flex-wrap: wrap;
+       justify-content: center; /* space-between; Adjusts space between products */
+       flex: 1 1 calc(50% - 50px); /* 3 products per row with space */
+       box-sizing: border-box;
+       margin-bottom: 20px;
+       top: 35px;
+      }
+      
+      .product h2 {
+       margin-top: 0;
+      }
+
+      .product img {
+       width: 120px;
+       height: 250px;
+      }
+
+      .h2-product-name {
+       margin: 0px;
+      }
+
+      .h5-product-stock-quantity {
+       margin: 0px 0px 0px 0px;
+      }
+      
+      .h5-product-quantity {
+       margin: 0px;
+      }
+
+      .open-view-detailed {
+       margin-top: 10px;
+       padding: 10px;
+       border: none;
+       border-radius: 5px;
+       background-color: yellow;
+       color: #000;
+       cursor: pointer;
+       text-align: center;
+       /*
+       margin: 0px;
+       border-box: solid;
+       width: 300px;
+       height: 25px;
+       border-radius: 5px;
+       background-color: yellow;
+       // 
+       
+       //
+       background-color: var(--header-bgcolor);
+       color: var(--text-color);
+       padding: 10px 20px;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       position: fixed;
+       width: 100%;
+       top: 0;
+       z-index: 1000;
+       border-bottom: 1px solid var(--border-color);
+       */
+      }
+
+      .open-view-detailed:hover {
+       background-color: green;
+       color: white;
+       /*
+       margin: 0px;
+       border-box: solid;
+       width: 300px;
+       height: 25px;
+       border-radius: 5px;
+       background-color: Green;
+       text-decoration: 1px bold;
+       color: white;
+       cursor: pointer;
+       //
+       background-color: var(--button-hover-color);
+       */
+      }
+      
+      .product-details {
+       display: inline-grid;
+       position: absolute;
+       top: 20%;
+       left: 50%;
+       transform: translate(-50%, 0);
+       width: 80%;
+       background: #fff;
+       border: 1px solid #ddd;
+       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+       padding: 20px;
+      }
+      
+      .product-details img {
+       width: 100%;
+       height: auto;
+      }
+      
+      .close {
+       cursor: pointer;
+       float: right;
+      }
+      /*
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+      }*/
+      
+      /* Social Media - Footer Setting */
+      .social-media {
+       margin: 0px 0px;
+      }
+      
+      .social-media a {
+       margin: 0 10px;
+       color: #fff;
+       text-decoration: none;
+       display: inline-block;
+      }
+      
+      .social-media a:hover {
+       color: #f39c12;
+      }
+
+      /* Footer Images */
+      .social-media a img {
+       width: 24px; /* Adjust the width to your desired size */
+       height: 24px; /* Maintains aspect ratio */
+      }
+
+      /* Payment Icons - Footer Setting */
+      .payment-icons {
+       margin: 0px 0px;
+      }
+      
+      .payment-icons a {
+       margin: 0 10px;
+       color: #fff;
+       text-decoration: none;
+       display: inline-block;
+      }
+      
+      .payment-icons a:hover {
+       color: #f39c12;
+      }
+
+      /* Footer Images */
+      .payment-icons a img {
+       width: 25px; /* You can Adjust the width to your desired size */
+       height: 25px; /* Keep Maintains the aspect ratio consistent */
+       margin: 0; /* Remove margin between icons */
+       padding: 0; /* Remove padding between icons */
+      }
+
+      /* Subscribe News-Letters - Footer Setting */
+      .newsletter {
+       margin: 20px 0;
+      }
+      
+      .newsletter input[type="email"] {
+       padding: 10px;
+       border: none;
+       border-radius: 5px;
+       width: 200px;
+      }
+      
+      .newsletter input[type="submit"] {
+       padding: 10px;
+       border: none;
+       border-radius: 5px;
+       background-color: #f39c12;
+       color: #fff;
+       cursor: pointer;
+      }
+      
+      .newsletter input[type="submit"]:hover {
+       background-color: #e67e22;
+      }
+
+      /* Basket Icon */
+      .basket-icon img {
+       width: 30px; /* Adjust the width to your desired as needed size */
+       height: 30px; /* This maintains the aspect ratio */
+       background-color: transparent;
+      }
+      
+      .basket-icon {
+       position: relative;
+       top: 10px;
+       right: 20px;
+       font-size: 1.5em;
+       cursor: pointer;
+      }
+
+      .sidebar-left {
+       width: 25%;
+       padding-right: 20px;
+      }
+
+      .new-arrivals img {
+       width: 100%;
+      }
+
+      .page-links ul {
+       list-style-type: none;
+       padding: 0;
+      }
+
+      .page-links ul li {
+       margin-bottom: 10px;
+      }
+
+      .page-links a {
+       text-decoration: none;
+       color: #333;
+      }
+
+      .sidebar-search input {
+       width: 100%;
+       padding: 5px;
+      }
+
+      /* Content Area */
+      .content-area {
+       width: 75%;
+      }
+
+      /* Product */
+      .product-list {
+       top: 55px;
+       position: relative;
+       margin-left: 11.99%;
+      }
+
+      .product {
+       //cursor: pointer;
+       margin-bottom: 20px;
+      }
+
+      .product img {
+       width: 300px;
+       height: 250px;
+      }
+      /*
+      .product h3 {
+       margin: 10px 0;
+      }*/
+
+      /* Lightbox */
+      #product-lightbox {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.8);
+       display: none;
+       justify-content: center;
+       align-items: center;
+      }
+
+      .lightbox-content {
+       background-color: white;
+       padding: 20px;
+       border-radius: 8px;
+       position: relative;
+       width: 80%;
+       max-width: 600px;
+      }
+
+      .product-image {
+       width: 500px;
+       height: 500px;
+      }
+
+      .close {
+       position: absolute;
+       top: 10px;
+       right: 10px;
+       cursor: pointer;
+       font-size: 24px;
+      }
+
+      /* Tabs */
+      .tabs button {
+       padding: 10px;
+       cursor: pointer;
+      }
+      .tab-content {
+       display: none;
+      }
+
+      /* Cart */
+      #cart {
+       display: none;
+       background-color: #f9f9f9;
+       padding: 20px;
+      }
+
+      /* Footer */
+      footer {
+       background-color: #333;
+       color: white;
+       padding: 0px;
+       text-align: center;
+       // Something change
+       margin-top: 0px;
+       border-top-width: 0px;
+       padding-top: 0px;
+       padding-bottom: 0px;
+       border-top-style: solid 0px;
+       border-bottom-style: solid 0px;
+       position: 10px;
+      }
+
+      .newsletter form {
+       display: flex;
+       justify-content: center;
+       margin-top: 10px;
+      }
+
+      .newsletter input {
+       padding: 5px;
+       font-size: 16px;
+      }
+
+      .newsletter button {
+       padding: 5px 10px;
+       font-size: 16px;
+      }
+      /* Some Thing Setup */
+
+      /* Main Area */
+      #main-content {
+       display: flex;
+       padding: 20px;
+       max-width: 100%; /* Ensure main content doesn't exceed the width of the screen */
+       flex-wrap: wrap; /* Allow items to wrap onto the next line */
+       box-sizing: border-box; /* Include padding and border in the element's total width and height */
+       border-top-style: solid 0px;
+       border-bottom-style: solid 0px;
+      }
+
+      /* Content Area */
+      .content-area {
+       width: 75%;
+       max-width: 100%; /* Prevent content area from exceeding 100% width */
+       word-wrap: break-word; /* Break long words to prevent overflow */
+      }
+      ///////////////////////////////////////////////////////////////////////////////////////////
+      /* Sidebar */
+.sidebar-left {
+  width: 25%;
+  max-width: 100%; /* Prevent sidebar from exceeding 100% width */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+/* Banner Styles */
+.banner {
+  width: 100%;
+  height: 250px; /* Adjust height as needed */
+  background: url('banner-image.jpg') no-repeat center center; /* Replace with your banner image URL */
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.banner-slider {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-slider-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.banner-slides {
+  display: flex;
+  width: 300%; /* Adjust according to the number of slides */
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.banner-slide {
+  flex: 1 0 100%;
+  max-width: 100%;
+  height: 100%; /* Ensures the slide takes up the full height of the banner */
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+}
+
+.banner-slide img {
+  width: 100%; /* Ensure image takes full width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Maintain aspect ratio and cover the dimensions */
+}
+
+      ///////////////////////////////////////////////////////////////////////////////////////////
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          padding-right: 0;
+        }
+
+        .content {
+          width: 100%;
+          flex-direction: column;
+        }
+
+        .product {
+          width: 100%;
+          margin: 0 0 20px;
+        }
+      }
+    </style>
+    <script>
+     const scriptUrl = 'https://script.google.com/macros/s/AKfycbwmh2-04wtEHY0h1xzVPSMd4gi2JdyEMjkPZHa29llyLzRP-6FAKMjFK6b5CB-BcpOb/exec'; // 'YOUR_WEB_APP_URL'; // Replace with your Google Apps Script web app URL
+
+     // Function to fetch data from Google Apps Script
+     function fetchData() {
+      fetch(scriptUrl)
+      .then(response => response.text())
+      .then(data => {
+       console.log('Data fetched:', data);
+       document.getElementById('result').innerText = data;
+      })
+      .catch(error => console.error('Error fetching data:', error));
+     }
+
+     // Function to send data to Google Apps Script
+     function sendData(data) {
+      fetch(scriptUrl, {
+       method: 'POST',
+       headers: {
+        'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+        .then(result => {
+        console.log('Result received:', result);
+        document.getElementById('result').innerText = JSON.stringify(result);
+        })
+        .catch(error => console.error('Error sending data:', error));
+      }
+
+      window.onload = function() {
+       fetchData(); // Fetch data when page loads
+      }
+
+
+
+      fetch('/api/products/1')
+      .then(response => response.json())
+      .then(product => {
+          var imageUrl = (product.front_image ? product.front_image.trim() : 'path/to/default-image.jpg');
+          document.getElementById('productImage').src = imageUrl;
+      })
+      .catch(error => console.error('Error fetching product data:', error));
+
+    // Global variable to store all products and cart
+    var allProducts = [];
+    var cart = [];
+
+    // Fetch and display products
+    function fetchProducts() {
+        google.script.run.withSuccessHandler(function(data) {
+            allProducts = JSON.parse(data); // Store the product data globally
+            displayProducts(allProducts); // Display all products initially
+        }).getProductData();
+    }
+
+// Display products on the page
+function displayProducts(products) {
+    var content = document.getElementById('product-list');
+    content.innerHTML = ''; // Clear existing products
+
+    // List of fallback images when the main image is not available
+    var image_NA_list = [
+        "https://imgs.search.brave.com/QrrF8yctvnxGKn5UBvuEt1XL7Pv04zXmzQ0y50RN5cY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA3LzkxLzIyLzU5/LzM2MF9GXzc5MTIy/NTkyN19jYVJQUEg5/OUQ2RDFpRm9ua0NS/bUNHemtKUGYzNlFE/dy5qcGc",
+        "https://imgs.search.brave.com/yvto4Mk6Yl8PjkarpBb1RqId_9rsXFqs3MiQrCtjMhY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvNTAwcC84/Mi85OS9uby1pbWFn/ZS1hdmFpbGFibGUt/bGlrZS1taXNzaW5n/LXBpY3R1cmUtdmVj/dG9yLTQzOTM4Mjk5/LmpwZw",
+        "https://imgs.search.brave.com/Tn5pKlMOw0_FerWffTprFCqRcdROmyyfH62WlFnrX-A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9h/L2FjL05vX2ltYWdl/X2F2YWlsYWJsZS5z/dmc"
+    ];
+
+    // List of fallback images when there is an error loading the main image
+    var error_image_list = [
+        "https://imgs.search.brave.com/yjr2Z5T-8TlPrkntaN9BXJG8jX_1UT8fWyhtzhCBivU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTIy/MjgwNjE0MS9waG90/by9jb21wdXRlci1l/cnJvci5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9UXFORVhn/YlBqMzFfZElhYkZk/WXh1NjFfSDBYSkNL/YzVTXzJMTzdaX1Rl/VT0",
+        "https://imgs.search.brave.com/6jwmSKewyErBtn4tZLYQqObgqQ2aMS8WbBDPHnAEevM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNDgz/NzczMTYzL3Bob3Rv/L2V4Y2xhbWF0aW9u/LXBvaW50LmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1ISWJ1/QTRJbDR3YlRaZnRn/eHhqMHY2d0ZYYlBD/VUZrQUJiR0Vyb2Jp/X0hNPQ",
+        "https://imgs.search.brave.com/KmcovpJlxHYPBqbwzFd2YOLtWBZDshXUYUCQyumCteA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgy/NzczOTAzL3Bob3Rv/L3dhcm5pbmctc2ln/bi1leGNsYW1hdGlv/bi1wb2ludC5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9dDlm/R3VMTWR2RTBjNlBu/dXFNWXIxWUd5NDZG/X2JOdE90ZVE0T1pD/MHhaST0"
+    ];
+
+    // Function to get a random image from a list
+    function getRandomImage(imageList) {
+        const randomIndex = Math.floor(Math.random() * imageList.length);
+        return imageList[randomIndex];
+    }
+
+    // Function to check if the image URL is accessible
+    function isImageAccessible(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+        });
+    }
+
+    // Loop through each product and create the necessary HTML elements
+    products.forEach(async function(product) {
+        console.log('Product Image URL:', product.front_image);
+
+        var availableStock = calculateAvailableStock(product.id);
+        var productDiv = document.createElement('div');
+        productDiv.className = 'product';
+
+        // Set a random fallback image initially
+        var imageUrl = getRandomImage(image_NA_list);
+
+        if (product.front_image) {
+            // Check if the image URL is accessible
+            var isAccessible = await isImageAccessible(product.front_image);
+
+            if (isAccessible) {
+                imageUrl = product.front_image;
+            } else {
+                console.error('Image URL not accessible:', product.front_image);
+                imageUrl = getRandomImage(error_image_list);
+            }
+        } else {
+            console.error('Product image URL is missing for product:', product.name);
+        }
+
+        productDiv.innerHTML = '<img src="' + imageUrl + '" alt="' + product.name + '" />' +
+                               '<h2 id="h2-product-name" class="h2-product-name">' + product.name + '</h2>' +
+                               '<h3 id="h3-product-price" class="h3-product-price">Price (in SAR): ' + product.price + '</h3>' +
+                               '<h5 id="h5-product-quantity" class="h5-product-stock-quantity">Available Stock Quantity: ' + availableStock + '</h5>' +
+                               '<button id="open-view-detailed" class="open-view-detailed" onclick="addToCart(' + product.id + ')">Open Detailed View</button>';
+
+        content.appendChild(productDiv);
+    });
+}
+
+
+    // Calculate available stock based on current orders
+    function calculateAvailableStock(productId) {
+        var product = allProducts.find(p => p.id === productId);
+        var orderedQuantity = cart.reduce(function(total, item) {
+            return item.productId === productId ? total + item.quantity : total;
+        }, 0);
+        return product.quantity - orderedQuantity;
+    }
+
+    // Add product to cart
+    function addToCart(productId) {
+        var product = allProducts.find(p => p.id === productId);
+        var availableStock = calculateAvailableStock(productId);
+
+        if (availableStock > 0) {
+            cart.push({ productId: productId, quantity: 1 });
+            displayProducts(allProducts); // Update product display after adding to cart
+        } else {
+            alert('Out of stock!');
+        }
+    }
+
+    // Search products
+    function searchProducts() {
+        var query = document.getElementById('searchInput').value.toLowerCase();
+        var filteredProducts = allProducts.filter(function(product) {
+            return product.name.toLowerCase().includes(query) ||
+                   product.description.toLowerCase().includes(query);
+        });
+        displayProducts(filteredProducts);
+    }
+
+    // Initialize and fetch products on page load
+    window.onload = function() {
+        fetchProducts();
+    };
+
+/*
+        // Global variable to store all products
+        var allProducts = [];
+
+        // Fetch and display products
+        function fetchProducts() {
+          google.script.run.withSuccessHandler(function(data) {
+            allProducts = JSON.parse(data); // Store the product data globally
+            displayProducts(allProducts); // Display all products initially
+          }).getProductData();
+        }
+
+        // Display products on the page
+        function displayProducts(products) {
+          var content = document.getElementById('product-list');
+          content.innerHTML = ''; // Clear existing products
+
+          products.forEach(function(product) {
+            var productDiv = document.createElement('div');
+            productDiv.className = 'product';
+
+            productDiv.innerHTML =  '<img src="' + product.front_image + '" alt="' + product.name + '"> <br>' +
+                                    '<br> <h2>' + product.name + '</h2> <br>' +
+                                    '<br> <p>Price: ' + product.price + product.front_image + '</p> <br>'
+                                    '<br> <p> Available-Quantity: ' + product.quantity + '</p>';
+
+            content.appendChild(productDiv);
+          });
+        }
+
+        // Search products
+        function searchProducts() {
+          var query = document.getElementById('searchInput').value.toLowerCase();
+          var filteredProducts = allProducts.filter(function(product) {
+            return product.name.toLowerCase().includes(query) ||
+                   product.description.toLowerCase().includes(query);
+          });
+          displayProducts(filteredProducts);
+        }
+
+        // Initialize and fetch products on page load
+        window.onload = function() {
+          fetchProducts();
+        };
+*/
+      // Fetch and display products
+      /*
+      function fetchProducts() {
+        google.script.run.withSuccessHandler(displayProducts).getProductData();
+      }
+      window.onload = fetchProducts;
+     
+      function displayProducts(data) {
+        var products = JSON.parse(data);
+        var content = document.getElementById('main-content');
+        content.innerHTML = ''; // Clear loading message
+
+        products.forEach(function(product) {
+          var productDiv = document.createElement('div');
+          productDiv.className = 'product';
+          
+          productDiv.innerHTML =  '<img src="' + product.image + '" alt="' + product.name + '">' +
+                                  '<br> <h2>' + product.name + '</h2>' +
+                                  '<br> <p>Price: ' + product.price + '</p>';
+          
+          content.appendChild(productDiv);
+        });
+      }
+      
+      window.onload = fetchProducts;
+*/    
+      //Somethinks mixing
+
+      // JavaScript for Lightbox
+      function showProductDetails(productId) {
+          document.getElementById('product-lightbox').style.display = 'block';
+          // Fetch and display product details based on productId
+      }
+
+      function closeLightbox() {
+          document.getElementById('product-lightbox').style.display = 'none';
+      }
+
+      function updatePrice() {
+          const quantity = parseInt(document.getElementById('quantity').value, 10);
+          const unitPrice = 10.00; // Replace with dynamic price
+          const totalPrice = (quantity * unitPrice).toFixed(2);
+          document.getElementById('total-price').textContent = totalPrice;
+      }
+
+      function addToCart() {
+          // Add product to cart and update cart icon
+          const itemCount = parseInt(document.getElementById('item-count').textContent, 10);
+          document.getElementById('item-count').textContent = itemCount + 1;
+          closeLightbox();
+      }
+
+      function toggleCart() {
+          const cart = document.getElementById('cart');
+          cart.style.display = cart.style.display === 'none' ? 'block' : 'none';
+      }
+
+      function checkout() {
+          // Redirect to checkout or display checkout form
+      }
+
+      function clearCart() {
+          // Clear cart items
+      }
+
+      // JavaScript for Search
+/*     document.getElementById('main-search').addEventListener('input', function() {
+          // Implement search logic here
+      });
+
+      document.getElementById('sidebar-search').addEventListener('input', function() {
+          // Implement search logic here
+      });
+
+      // JavaScript for Slideshow
+      let slideIndex = 0;
+      function showSlides() {
+          const slides = document.getElementsByClassName('mySlides');
+          for (let i = 0; i < slides.length; i++) {
+              slides[i].style.display = 'none';
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {
+              slideIndex = 1;
+          }
+          slides[slideIndex - 1].style.display = 'block';
+          setTimeout(showSlides, 3000); // Change slide every 3 seconds
+      }
+      showSlides();
+*/
+      // Tabs
+      function openTab(tabName) {
+          const tabs = document.getElementsByClassName('tab-content');
+          for (let i = 0; i < tabs.length; i++) {
+              tabs[i].style.display = 'none';
+          }
+          document.getElementById(tabName).style.display = 'block';
+      }
+
+      // Search products
+/*
+      function searchProducts() {
+        var query = document.getElementById('searchInput').value.toLowerCase();
+        var filteredProducts = allProducts.filter(function(product) {
+          return product.name.toLowerCase().includes(query) ||
+                product.description.toLowerCase().includes(query);
+        });
+        displayProducts(filteredProducts);
+      }
+
+      function searchProducts() {
+          var query = document.querySelector('.search-bar input').value.toLowerCase(); 
+          var filteredProducts = allProducts.filter(function(product) {
+              return product.name.toLowerCase().includes(query) ||
+                    product.description.toLowerCase().includes(query);
+          });
+          displayProducts(filteredProducts);
+
+          var allProducts = []; // Define globally
+
+          function displayProducts(data) {
+              allProducts = data; // Store all products for searching
+              // ... existing display code ...
+          }
+
+      }*/
+
+      function startAutoUpdate(interval) {
+        fetchProducts(); // Initial fetch
+        setInterval(fetchProducts, interval); // Fetch every 'interval' milliseconds
+      }
+      
+      window.onload = function() {
+        startAutoUpdate(60000); // Auto-update every 60 seconds
+      };
+      
+      // Banner Slider Controls
+      /*
+      (function() {
+        var slideIndex = 0;
+        var slides = document.querySelectorAll('.banner-slide');
+        var totalSlides = slides.length;
+
+        function showSlide(index) {
+          var offset = -index * 100;
+          document.querySelector('.banner-slides').style.transform = 'translateX(' + offset + '%)';
+        }
+
+        function nextSlide() {
+          slideIndex = (slideIndex + 1) % totalSlides;
+          showSlide(slideIndex);
+        }
+
+        // Auto-slide every 3 seconds
+        setInterval(nextSlide, 3000);
+      })();*/
+
+      document.addEventListener('DOMContentLoaded', function() {
+  const slides = document.querySelector('.banner-slides');
+  const slideCount = document.querySelectorAll('.banner-slide').length;
+  let currentIndex = 0;
+  
+  function showSlide(index) {
+    const offset = -index * 100;
+    slides.style.transform = `translateX(${offset}%)`;
+  }
+  
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slideCount;
+    showSlide(currentIndex);
+  }
+  
+  setInterval(nextSlide, 3000); // Change slide every 3 seconds
+});
+
+
+    </script>
+  </head>
+  <body>
+
+  <header>
+      <div class="logo">Zarraab Trading</div>
+      <div class="search-bar">
+          <input type="text" placeholder="Search..." oninput="searchProducts()" id="searchInput" class="searchInput">
+      </div>
+      <nav>
+          <a href="#home">Home</a>
+          <a href="#contact">Contact Us</a>
+          <a href="#success-stories">Customer Success Stories</a>
+      </nav>
+      <div class="basket-icon">
+        <img src="https://media.istockphoto.com/id/1359181702/vector/shopping-cart-vector-icon-trolley-flat-design-illustration-business-concept-symbol-in-eps-10.jpg?s=612x612&w=0&k=20&c=k7cWYt8Zqay8YX3f8Vt4q1tQAWdx4OmYp1NVwnzmj5s=">
+      </div>
+    </header>
+
+    <!-- Main Area -->
+    <main id="main-content">
+
+     <!-- Banner Section -->
+     <div class="banner">
+       <div class="banner-slider">
+         <div class="banner-slider-container">
+           <div class="banner-slides">
+             <div class="banner-slide">
+               <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Slide 1">
+             </div>
+             <div class="banner-slide">
+               <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Slide 2">
+             </div>
+             <div class="banner-slide">
+               <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Slide 3">
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+
+          <!--
+          <div class="slides">
+            <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Slide 1" class="slide">
+            <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Slide 2" class="slide">
+            <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Slide 3" class="slide">
+          </div>
+          -->
+        </div>
+      </div>
+
+      <!-- Existing content below --><!--
+      <main id="main-content">
+          <!-- Your product listing, sidebar, and other sections here ->
+      </main>-->
+
+      <div id="home">
+        <br>
+        <h2> <!-- Home Page --> </h2>
+        <!-- Dynamically Product Fetch Here -->
+        <div id="product-list" class="product-list">
+          <!-- Product items will be dynamically inserted here -->
+          <div style="top: 55px;" class="product">
+            <img src="https://imgs.search.brave.com/o5g-KNJNAClv3HcBPAR1hyIu1zWTMdG55UR6Rq-1OZ0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly80Lmlt/aW1nLmNvbS9kYXRh/NC9ESS9PUC9NWS0y/MjkxMTM3MC9tZW4t/cy10aG9iZS01MDB4/NTAwLmpwZw" alt="Dummy Product">
+            <h2 id="h2-product-name" class="h2-product-name" >Dummy Product</h2>
+            <h3 id="h3-product-price" class="h3-product-price" >Price (in SAR): XXX,XXX.XX </h3>
+            <h5 id="h5-product-quantity" class="h5-product-stock-quantity" > Available Stock Quantity: X,XXX </h5>
+            <button id="open-view-detailed" class="open-view-detailed" onclick="addToCart('dummyproduct')">Open Detailed View</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <!-- Contact Us Page -->
+        <section id="contact-us" style="display: none;">
+          <h2>Contact Us</h2>
+          <form>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone">
+            <label for="address">Delivery Address:</label>
+            <input type="text" id="address" required>
+            <label for="country">Country/Region:</label>
+            <input type="text" id="country" required>
+            <button type="submit">Submit</button>
+          </form>
+          <div class="office-address">
+            <h3>Office Address:</h3>
+            <p>123 Main Street, City, Country</p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- LightBox -->
+      <div id="product-lightbox" style="display: none;">
+        <div class="lightbox-content">
+          <span class="close" onclick="closeLightbox()">&times;</span>
+          <img id="lightbox-image" class="product-image" src="" alt="Product Image">
+          <h3 id="lightbox-title"></h3>
+          <p id="lightbox-price"></p>
+          <div class="tabs">
+            <button onclick="openTab('details')">Details</button>
+            <button onclick="openTab('reviews')">Reviews</button>
+          </div>
+          <div id="details" class="tab-content">
+            <p id="lightbox-details"></p>
+          </div>
+          <div id="reviews" class="tab-content">
+            <p id="lightbox-reviews">No reviews yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details Popup -->
+      <div id="product-details-popup" class="product-details" style="display: none;">
+        <span class="close" onclick="hideDetails()">X</span>
+        <h2 id="popup-title">Product Details</h2>
+        <img id="popup-image" src="" alt="Product Image">
+        <p id="popup-quantity">Number of Quantity Available: </p>
+        <p id="popup-price">Price: </p>
+        <label for="popup-quantity-input">Order Quantity:</label>
+        <input type="number" id="popup-quantity-input" name="quantity" min="1" value="1">
+        <button>Add to Cart</button>
+        <!-- Additional details and tabs -->
+      </div>
+      
+      <br>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <table style="table-align:center;">
+        <tbody>
+          <tr>
+            <td>
+              <!-- Social Media Icons -->
+              <div class="social-media-icons">
+                <a href="https://www.facebook.com/">
+                  <img src="https://cdn.dribbble.com/users/2973/screenshots/16757947/media/c56c56d24f8c591ff753faa15ea4a033.png?resize=400x0" style="height: 24px;width: 24px;">
+                  <img src="https://cdn.logojoy.com/wp-content/uploads/20230922110325/facebook-2021-logo-600x319.png" style="width: 24px;height: 24px;">
+                </a>
+                <a href="https://twitter.com/">
+                  <img src="https://www.zilliondesigns.com/blog/wp-content/uploads/Twitter-New-Logo-X-2023-.jpg" style="width: 24px;height: 24px;">
+                </a>
+                <a href="#telegram">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJRT4QQPCEiBxMbBPneQvKitxFvatOy5Cj7SzD2sqNqpHnaLIM9j1IofrSNM8OYMF4pXA&amp;usqp=CAU" style="width: 24px;height: 24px;">
+                </a>
+                <a href="https://web.whatsapp.com/">
+                  <img src="https://i.pinimg.com/200x150/ea/ef/ca/eaefcad3d9695ae94098674193faf554.jpg" style="height: 24px;width: 24px;">
+                </a>
+                <a href="https://www.instagram.com/">
+                  <img src="https://w7.pngwing.com/pngs/5/164/png-transparent-instagram-icon-thepix-digital-marketing-logo-shiftdelete-instagram-logo-miscellaneous-rectangle-magenta.png" style="width: 24px;height: 24px;">
+                </a>
+                <a href="https://www.tiktok.com/en/">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP0N3zvG1w5AohL7rpXml844HBmbINcRx0oDSCMCrpiT55vOV8ILlUzTV78Q6na5tPjxs&amp;usqp=CAU" style="width: 24px;">
+                </a>
+                <a href="https://www.snapchat.com/">
+                  <img src="https://e7.pngegg.com/pngimages/611/663/png-clipart-snapchat-social-media-logo-snap-inc-advertising-snapchat-text-logo.png" style="width: 24px;height: 24px;">
+                </a>
+                <a href="https://www.pinterest.com/">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHvcbLicnN4W0H5xAPl7ymu0D2MEck1IDBsxXyR1D5q8QIQmEM8MgwN3a4UNiIYlm1sIg&amp;usqp=CAU" style="width: 24px;">
+                </a>
+                <a href="https://www.skype.com/en/">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjtbWUbHpbNux4j79LUYYNiY1G9lp26w49NPZGNLTLyFTC11_TXt4Ww4r4k4_kT9BubkU&amp;usqp=CAU" style="height: 24px;">
+                </a>
+                <a href="https://www.reddit.com/">
+                  <img src="https://i.pinimg.com/736x/be/60/c7/be60c7a3e01b2f57ca803217eb1800ea.jpg" style="width: 24px;height: 24px;">
+                </a>
+                <a href="https://www.tumblr.com/">
+                  <img src="https://w7.pngwing.com/pngs/41/143/png-transparent-app-logo-media-popular-social-tumblr-web-2018-social-media-app-logos-icon-thumbnail.png" style="width: 24px;">
+                </a>
+                <a href="https://www.linkedin.com/">
+                  <img src="https://i.pinimg.com/1200x/7b/c1/05/7bc10513d125a6b23b036f2ada12c3d7.jpg" style="width: 24px;">
+                </a>
+            </div>
+            </td>
+            <td>
+              <!-- Subscribe News-Letters -->
+              <div class="newsletter">
+                <form action="#">
+                  <input type="email" placeholder="Subscribe to our newsletter">
+                    <button type="submit">Subscribe</button>
+                </form>
+              </div>
+            </td>
+            <td>
+              <!-- Payment Icons -->
+              <div class="payment-icons">
+                <a href="#bank-transfer">
+                  <img src="https://www.shutterstock.com/image-vector/bank-transfer-icon-vector-logotype-600nw-2144565823.jpg" />
+                  <img src="https://static.vecteezy.com/system/resources/previews/020/936/477/original/credit-card-icon-for-your-website-design-logo-app-ui-free-vector.jpg" />
+                  <img src="https://thumbs.dreamstime.com/b/card-accepted-business-debit-credit-card-business-payment-flat-icon-set-master-card-visa-logo-card-accepted-304626463.jpg" />
+                  <img src="https://static.vecteezy.com/system/resources/previews/020/270/834/original/wallet-icon-for-your-website-design-logo-app-ui-free-vector.jpg" />
+                  <img src="https://cdn.vectorstock.com/i/preview-1x/15/76/crypto-currency-c-letter-logo-vector-41711576.jpg" />
+                  <img src="https://www.shutterstock.com/image-vector/initial-letter-c-logo-e-600nw-1678412641.jpg">
+                  <img src="https://ps.w.org/cryptocurrencycheckout-woocommerce-gateway/assets/icon-256x256.png?rev=2114520">
+                  <img src="https://cdn.vectorstock.com/i/preview-1x/15/76/crypto-currency-c-letter-logo-vector-41711576.jpg">
+                  <img src="https://png.pngtree.com/png-clipart/20210530/original/pngtree-cash-on-delivery-order-logo-designs-png-image_6357220.jpg" />
+                  <img src="https://cdn.dribbble.com/users/920/screenshots/3031540/untitled-3.gif" />
+                  <img src="https://wallpapers.com/images/hd/iconic-paypal-logo-hz1p638jayet7nyc.jpg" />
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan='3' style="text-align: center">
+              <!-- Company Details Rights and Reserved -->              
+                <div class="company-details">
+                  <p>&copy; 2024 Zarraab Fashions. All rights reserved.</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </footer>
+
+  </body>
+</html>
+<button href="./index_old.html">Click to old check</button>
