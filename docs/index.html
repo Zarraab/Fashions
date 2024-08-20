@@ -622,388 +622,203 @@
     <script>
      const scriptUrl = 'https://script.google.com/macros/s/AKfycbwmh2-04wtEHY0h1xzVPSMd4gi2JdyEMjkPZHa29llyLzRP-6FAKMjFK6b5CB-BcpOb/exec'; // 'YOUR_WEB_APP_URL'; // Replace with your Google Apps Script web app URL
 
-     // Function to fetch data from Google Apps Script
-     function fetchData() {
-      fetch(scriptUrl)
-      .then(response => response.text())
-      .then(data => {
-       console.log('Data fetched:', data);
-       document.getElementById('result').innerText = data;
-      })
-      .catch(error => console.error('Error fetching data:', error));
-     }
-
-     // Function to send data to Google Apps Script
-     function sendData(data) {
-      fetch(scriptUrl, {
-       method: 'POST',
-       headers: {
-        'Content-Type': 'application/json'
-       },
-       body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-        .then(result => {
-        console.log('Result received:', result);
-        document.getElementById('result').innerText = JSON.stringify(result);
-        })
-        .catch(error => console.error('Error sending data:', error));
-      }
-
-      window.onload = function() {
-       fetchData(); // Fetch data when page loads
-      }
-
-
-
-      fetch('/api/products/1')
-      .then(response => response.json())
-      .then(product => {
-          var imageUrl = (product.front_image ? product.front_image.trim() : 'path/to/default-image.jpg');
-          document.getElementById('productImage').src = imageUrl;
-      })
-      .catch(error => console.error('Error fetching product data:', error));
-
-    // Global variable to store all products and cart
-    var allProducts = [];
-    var cart = [];
-
-    // Fetch and display products
-    function fetchProducts() {
-        google.script.run.withSuccessHandler(function(data) {
-            allProducts = JSON.parse(data); // Store the product data globally
-            displayProducts(allProducts); // Display all products initially
-        }).getProductData();
-    }
-
-// Display products on the page
-function displayProducts(products) {
-    var content = document.getElementById('product-list');
-    content.innerHTML = ''; // Clear existing products
-
-    // List of fallback images when the main image is not available
-    var image_NA_list = [
-        "https://imgs.search.brave.com/QrrF8yctvnxGKn5UBvuEt1XL7Pv04zXmzQ0y50RN5cY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA3LzkxLzIyLzU5/LzM2MF9GXzc5MTIy/NTkyN19jYVJQUEg5/OUQ2RDFpRm9ua0NS/bUNHemtKUGYzNlFE/dy5qcGc",
-        "https://imgs.search.brave.com/yvto4Mk6Yl8PjkarpBb1RqId_9rsXFqs3MiQrCtjMhY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvNTAwcC84/Mi85OS9uby1pbWFn/ZS1hdmFpbGFibGUt/bGlrZS1taXNzaW5n/LXBpY3R1cmUtdmVj/dG9yLTQzOTM4Mjk5/LmpwZw",
-        "https://imgs.search.brave.com/Tn5pKlMOw0_FerWffTprFCqRcdROmyyfH62WlFnrX-A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9h/L2FjL05vX2ltYWdl/X2F2YWlsYWJsZS5z/dmc"
-    ];
-
-    // List of fallback images when there is an error loading the main image
-    var error_image_list = [
-        "https://imgs.search.brave.com/yjr2Z5T-8TlPrkntaN9BXJG8jX_1UT8fWyhtzhCBivU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTIy/MjgwNjE0MS9waG90/by9jb21wdXRlci1l/cnJvci5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9UXFORVhn/YlBqMzFfZElhYkZk/WXh1NjFfSDBYSkNL/YzVTXzJMTzdaX1Rl/VT0",
-        "https://imgs.search.brave.com/6jwmSKewyErBtn4tZLYQqObgqQ2aMS8WbBDPHnAEevM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNDgz/NzczMTYzL3Bob3Rv/L2V4Y2xhbWF0aW9u/LXBvaW50LmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1ISWJ1/QTRJbDR3YlRaZnRn/eHhqMHY2d0ZYYlBD/VUZrQUJiR0Vyb2Jp/X0hNPQ",
-        "https://imgs.search.brave.com/KmcovpJlxHYPBqbwzFd2YOLtWBZDshXUYUCQyumCteA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgy/NzczOTAzL3Bob3Rv/L3dhcm5pbmctc2ln/bi1leGNsYW1hdGlv/bi1wb2ludC5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9dDlm/R3VMTWR2RTBjNlBu/dXFNWXIxWUd5NDZG/X2JOdE90ZVE0T1pD/MHhaST0"
-    ];
-
-    // Function to get a random image from a list
-    function getRandomImage(imageList) {
-        const randomIndex = Math.floor(Math.random() * imageList.length);
-        return imageList[randomIndex];
-    }
-
-    // Function to check if the image URL is accessible
-    function isImageAccessible(url) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = url;
-        });
-    }
-
-    // Loop through each product and create the necessary HTML elements
-    products.forEach(async function(product) {
-        console.log('Product Image URL:', product.front_image);
-
-        var availableStock = calculateAvailableStock(product.id);
-        var productDiv = document.createElement('div');
-        productDiv.className = 'product';
-
-        // Set a random fallback image initially
-        var imageUrl = getRandomImage(image_NA_list);
-
-        if (product.front_image) {
-            // Check if the image URL is accessible
-            var isAccessible = await isImageAccessible(product.front_image);
-
-            if (isAccessible) {
-                imageUrl = product.front_image;
-            } else {
-                console.error('Image URL not accessible:', product.front_image);
-                imageUrl = getRandomImage(error_image_list);
-            }
-        } else {
-            console.error('Product image URL is missing for product:', product.name);
+      // Function to fetch data from Google Apps Script
+        function fetchData() {
+            fetch(scriptUrl)
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Data fetched:', data);
+                    document.getElementById('result').innerText = data;
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
 
-        productDiv.innerHTML = '<img src="' + imageUrl + '" alt="' + product.name + '" />' +
-                               '<h2 id="h2-product-name" class="h2-product-name">' + product.name + '</h2>' +
-                               '<h3 id="h3-product-price" class="h3-product-price">Price (in SAR): ' + product.price + '</h3>' +
-                               '<h5 id="h5-product-quantity" class="h5-product-stock-quantity">Available Stock Quantity: ' + availableStock + '</h5>' +
-                               '<button id="open-view-detailed" class="open-view-detailed" onclick="addToCart(' + product.id + ')">Open Detailed View</button>';
-
-        content.appendChild(productDiv);
-    });
-}
-
-
-    // Calculate available stock based on current orders
-    function calculateAvailableStock(productId) {
-        var product = allProducts.find(p => p.id === productId);
-        var orderedQuantity = cart.reduce(function(total, item) {
-            return item.productId === productId ? total + item.quantity : total;
-        }, 0);
-        return product.quantity - orderedQuantity;
-    }
-
-    // Add product to cart
-    function addToCart(productId) {
-        var product = allProducts.find(p => p.id === productId);
-        var availableStock = calculateAvailableStock(productId);
-
-        if (availableStock > 0) {
-            cart.push({ productId: productId, quantity: 1 });
-            displayProducts(allProducts); // Update product display after adding to cart
-        } else {
-            alert('Out of stock!');
+        // Function to send data to Google Apps Script
+        function sendData(data) {
+            fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Result received:', result);
+                document.getElementById('result').innerText = JSON.stringify(result);
+            })
+            .catch(error => console.error('Error sending data:', error));
         }
-    }
 
-    // Search products
-    function searchProducts() {
-        var query = document.getElementById('searchInput').value.toLowerCase();
-        var filteredProducts = allProducts.filter(function(product) {
-            return product.name.toLowerCase().includes(query) ||
-                   product.description.toLowerCase().includes(query);
-        });
-        displayProducts(filteredProducts);
-    }
-
-    // Initialize and fetch products on page load
-    window.onload = function() {
-        fetchProducts();
-    };
-
-/*
-        // Global variable to store all products
         var allProducts = [];
+        var cart = [];
 
         // Fetch and display products
         function fetchProducts() {
-          google.script.run.withSuccessHandler(function(data) {
-            allProducts = JSON.parse(data); // Store the product data globally
-            displayProducts(allProducts); // Display all products initially
-          }).getProductData();
+            google.script.run.withSuccessHandler(function(data) {
+                allProducts = JSON.parse(data);
+                displayProducts(allProducts);
+            }).getProductData();
         }
 
         // Display products on the page
         function displayProducts(products) {
-          var content = document.getElementById('product-list');
-          content.innerHTML = ''; // Clear existing products
+            var content = document.getElementById('product-list');
+            content.innerHTML = '';
 
-          products.forEach(function(product) {
-            var productDiv = document.createElement('div');
-            productDiv.className = 'product';
+            var image_NA_list = [
+                // List of fallback images
+            ];
 
-            productDiv.innerHTML =  '<img src="' + product.front_image + '" alt="' + product.name + '"> <br>' +
-                                    '<br> <h2>' + product.name + '</h2> <br>' +
-                                    '<br> <p>Price: ' + product.price + product.front_image + '</p> <br>'
-                                    '<br> <p> Available-Quantity: ' + product.quantity + '</p>';
+            var error_image_list = [
+                // List of error images
+            ];
 
-            content.appendChild(productDiv);
-          });
+            function getRandomImage(imageList) {
+                const randomIndex = Math.floor(Math.random() * imageList.length);
+                return imageList[randomIndex];
+            }
+
+            function isImageAccessible(url) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+            }
+
+            products.forEach(async function(product) {
+                console.log('Product Image URL:', product.front_image);
+
+                var availableStock = calculateAvailableStock(product.id);
+                var productDiv = document.createElement('div');
+                productDiv.className = 'product';
+
+                var imageUrl = getRandomImage(image_NA_list);
+
+                if (product.front_image) {
+                    var isAccessible = await isImageAccessible(product.front_image);
+                    if (isAccessible) {
+                        imageUrl = product.front_image;
+                    } else {
+                        console.error('Image URL not accessible:', product.front_image);
+                        imageUrl = getRandomImage(error_image_list);
+                    }
+                } else {
+                    console.error('Product image URL is missing for product:', product.name);
+                }
+
+                productDiv.innerHTML = '<img src="' + imageUrl + '" alt="' + product.name + '" />' +
+                                       '<h2 id="h2-product-name" class="h2-product-name">' + product.name + '</h2>' +
+                                       '<h3 id="h3-product-price" class="h3-product-price">Price (in SAR): ' + product.price + '</h3>' +
+                                       '<h5 id="h5-product-quantity" class="h5-product-stock-quantity">Available Stock Quantity: ' + availableStock + '</h5>' +
+                                       '<button id="open-view-detailed" class="open-view-detailed" onclick="addToCart(' + product.id + ')">Open Detailed View</button>';
+
+                content.appendChild(productDiv);
+            });
         }
 
-        // Search products
+        function calculateAvailableStock(productId) {
+            var product = allProducts.find(p => p.id === productId);
+            var orderedQuantity = cart.reduce(function(total, item) {
+                return item.productId === productId ? total + item.quantity : total;
+            }, 0);
+            return product.quantity - orderedQuantity;
+        }
+
+        function addToCart(productId) {
+            var product = allProducts.find(p => p.id === productId);
+            var availableStock = calculateAvailableStock(productId);
+
+            if (availableStock > 0) {
+                cart.push({ productId: productId, quantity: 1 });
+                displayProducts(allProducts);
+            } else {
+                alert('Out of stock!');
+            }
+        }
+
         function searchProducts() {
-          var query = document.getElementById('searchInput').value.toLowerCase();
-          var filteredProducts = allProducts.filter(function(product) {
-            return product.name.toLowerCase().includes(query) ||
-                   product.description.toLowerCase().includes(query);
-          });
-          displayProducts(filteredProducts);
+            var query = document.getElementById('searchInput').value.toLowerCase();
+            var filteredProducts = allProducts.filter(function(product) {
+                return product.name.toLowerCase().includes(query) ||
+                       product.description.toLowerCase().includes(query);
+            });
+            displayProducts(filteredProducts);
         }
 
-        // Initialize and fetch products on page load
+        function showProductDetails(productId) {
+            document.getElementById('product-lightbox').style.display = 'block';
+            // Fetch and display product details based on productId
+        }
+
+        function closeLightbox() {
+            document.getElementById('product-lightbox').style.display = 'none';
+        }
+
+        function updatePrice() {
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            const unitPrice = 10.00;
+            const totalPrice = (quantity * unitPrice).toFixed(2);
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+
+        function addToCart() {
+            const itemCount = parseInt(document.getElementById('item-count').textContent, 10);
+            document.getElementById('item-count').textContent = itemCount + 1;
+            closeLightbox();
+        }
+
+        function toggleCart() {
+            const cart = document.getElementById('cart');
+            cart.style.display = cart.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function checkout() {
+            // Redirect to checkout or display checkout form
+        }
+
+        function clearCart() {
+            // Clear cart items
+        }
+
+        function openTab(tabName) {
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = 'none';
+            }
+            document.getElementById(tabName).style.display = 'block';
+        }
+
+        function startAutoUpdate(interval) {
+            fetchProducts();
+            setInterval(fetchProducts, interval);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelector('.banner-slides');
+            const slideCount = document.querySelectorAll('.banner-slide').length;
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                const offset = -index * 100;
+                slides.style.transform = `translateX(${offset}%)`;
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                showSlide(currentIndex);
+            }
+
+            setInterval(nextSlide, 3000);
+        });
+
         window.onload = function() {
-          fetchProducts();
+            fetchProducts();
+            startAutoUpdate(60000);
         };
-*/
-      // Fetch and display products
-      /*
-      function fetchProducts() {
-        google.script.run.withSuccessHandler(displayProducts).getProductData();
-      }
-      window.onload = fetchProducts;
      
-      function displayProducts(data) {
-        var products = JSON.parse(data);
-        var content = document.getElementById('main-content');
-        content.innerHTML = ''; // Clear loading message
-
-        products.forEach(function(product) {
-          var productDiv = document.createElement('div');
-          productDiv.className = 'product';
-          
-          productDiv.innerHTML =  '<img src="' + product.image + '" alt="' + product.name + '">' +
-                                  '<br> <h2>' + product.name + '</h2>' +
-                                  '<br> <p>Price: ' + product.price + '</p>';
-          
-          content.appendChild(productDiv);
-        });
-      }
-      
-      window.onload = fetchProducts;
-*/    
-      //Somethinks mixing
-
-      // JavaScript for Lightbox
-      function showProductDetails(productId) {
-          document.getElementById('product-lightbox').style.display = 'block';
-          // Fetch and display product details based on productId
-      }
-
-      function closeLightbox() {
-          document.getElementById('product-lightbox').style.display = 'none';
-      }
-
-      function updatePrice() {
-          const quantity = parseInt(document.getElementById('quantity').value, 10);
-          const unitPrice = 10.00; // Replace with dynamic price
-          const totalPrice = (quantity * unitPrice).toFixed(2);
-          document.getElementById('total-price').textContent = totalPrice;
-      }
-
-      function addToCart() {
-          // Add product to cart and update cart icon
-          const itemCount = parseInt(document.getElementById('item-count').textContent, 10);
-          document.getElementById('item-count').textContent = itemCount + 1;
-          closeLightbox();
-      }
-
-      function toggleCart() {
-          const cart = document.getElementById('cart');
-          cart.style.display = cart.style.display === 'none' ? 'block' : 'none';
-      }
-
-      function checkout() {
-          // Redirect to checkout or display checkout form
-      }
-
-      function clearCart() {
-          // Clear cart items
-      }
-
-      // JavaScript for Search
-/*     document.getElementById('main-search').addEventListener('input', function() {
-          // Implement search logic here
-      });
-
-      document.getElementById('sidebar-search').addEventListener('input', function() {
-          // Implement search logic here
-      });
-
-      // JavaScript for Slideshow
-      let slideIndex = 0;
-      function showSlides() {
-          const slides = document.getElementsByClassName('mySlides');
-          for (let i = 0; i < slides.length; i++) {
-              slides[i].style.display = 'none';
-          }
-          slideIndex++;
-          if (slideIndex > slides.length) {
-              slideIndex = 1;
-          }
-          slides[slideIndex - 1].style.display = 'block';
-          setTimeout(showSlides, 3000); // Change slide every 3 seconds
-      }
-      showSlides();
-*/
-      // Tabs
-      function openTab(tabName) {
-          const tabs = document.getElementsByClassName('tab-content');
-          for (let i = 0; i < tabs.length; i++) {
-              tabs[i].style.display = 'none';
-          }
-          document.getElementById(tabName).style.display = 'block';
-      }
-
-      // Search products
-/*
-      function searchProducts() {
-        var query = document.getElementById('searchInput').value.toLowerCase();
-        var filteredProducts = allProducts.filter(function(product) {
-          return product.name.toLowerCase().includes(query) ||
-                product.description.toLowerCase().includes(query);
-        });
-        displayProducts(filteredProducts);
-      }
-
-      function searchProducts() {
-          var query = document.querySelector('.search-bar input').value.toLowerCase(); 
-          var filteredProducts = allProducts.filter(function(product) {
-              return product.name.toLowerCase().includes(query) ||
-                    product.description.toLowerCase().includes(query);
-          });
-          displayProducts(filteredProducts);
-
-          var allProducts = []; // Define globally
-
-          function displayProducts(data) {
-              allProducts = data; // Store all products for searching
-              // ... existing display code ...
-          }
-
-      }*/
-
-      function startAutoUpdate(interval) {
-        fetchProducts(); // Initial fetch
-        setInterval(fetchProducts, interval); // Fetch every 'interval' milliseconds
-      }
-      
-      window.onload = function() {
-        startAutoUpdate(60000); // Auto-update every 60 seconds
-      };
-      
-      // Banner Slider Controls
-      /*
-      (function() {
-        var slideIndex = 0;
-        var slides = document.querySelectorAll('.banner-slide');
-        var totalSlides = slides.length;
-
-        function showSlide(index) {
-          var offset = -index * 100;
-          document.querySelector('.banner-slides').style.transform = 'translateX(' + offset + '%)';
-        }
-
-        function nextSlide() {
-          slideIndex = (slideIndex + 1) % totalSlides;
-          showSlide(slideIndex);
-        }
-
-        // Auto-slide every 3 seconds
-        setInterval(nextSlide, 3000);
-      })();*/
-
-      document.addEventListener('DOMContentLoaded', function() {
-  const slides = document.querySelector('.banner-slides');
-  const slideCount = document.querySelectorAll('.banner-slide').length;
-  let currentIndex = 0;
-  
-  function showSlide(index) {
-    const offset = -index * 100;
-    slides.style.transform = `translateX(${offset}%)`;
-  }
-  
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % slideCount;
-    showSlide(currentIndex);
-  }
-  
-  setInterval(nextSlide, 3000); // Change slide every 3 seconds
-});
-
 
     </script>
   </head>
@@ -1215,7 +1030,7 @@ function displayProducts(products) {
             </td>
           </tr>
           <tr>
-            <td rowspan='3' style="text-align: center">
+            <td rowspan="3" style="text-align: Left">
               <!-- Company Details Rights and Reserved -->              
                 <div class="company-details">
                   <p>&copy; 2024 Zarraab Fashions. All rights reserved.</p>
@@ -1228,4 +1043,4 @@ function displayProducts(products) {
 
   </body>
 </html>
-<button href="./index_old.html">Click to old check</button>
+<a href="https://zarrab-abaya.github.io/Fashion/index_old.html">Click to old check</a>
