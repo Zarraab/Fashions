@@ -42,7 +42,7 @@ const uRl = [
 
 //const scriptUrl = uRl[3];
 
-//const url = uRl[4];
+const url = uRl[4];
 
 fetch(url)//, { mode: 'no-cors' })
  .then(response => {
